@@ -1,0 +1,49 @@
+/*
+ * PGH-DOC
+ * File: src/assets/scss/theme/_cart.scss
+ * Apa fungsi bagian ini:
+ * - File ini mengatur style/theme visual agar tampilan konsisten.
+ * Kenapa perlu:
+ * - Perlu agar pengalaman pengguna konsisten, flow antar halaman jelas, dan perubahan UI tidak memecah perilaku fitur.
+ * Aturan khususnya apa:
+ * - Gunakan komponen global tabel/filter/export yang sudah tersedia; hindari duplikasi implementasi per halaman.
+ * - Jaga konsistensi style/theme dan perilaku UX lintas unit.
+ * - Integrasi data harus mengikuti adapter serverQuery/helper global yang sudah ada.
+ */
+
+/**=====================
+  14. cart CSS start
+==========================**/
+.cart {
+  .total-amount {
+    text-align: right !important;
+    margin-top: 30px;
+  }
+  .amount-space {
+    margin-left: 40px;
+  }
+  .cart-btn-transform {
+    text-transform: capitalize;
+  }
+  .qty-box {
+    width: 25%;
+    margin: 0 auto;
+    .input-group {
+      .btn {
+        background-color: #ddd !important;
+        border-color: #ddd !important;
+        padding: 5px 12px;
+      }
+    }
+  }
+}
+.cart-buttons {
+  margin-top: 30px;
+  .cart-btn {
+    float: right;
+    padding-right: 85px;
+  }
+}
+/**=====================
+  14. cart CSS Ends
+==========================**/

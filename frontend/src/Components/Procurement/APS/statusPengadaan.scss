@@ -1,0 +1,687 @@
+/*
+ * PGH-DOC
+ * File: src/Components/Procurement/APS/statusPengadaan.scss
+ * Apa fungsi bagian ini:
+ * - File ini membangun UI/fitur utama yang dilihat user per unit kerja.
+ * Kenapa perlu:
+ * - Perlu agar pengalaman pengguna konsisten, flow antar halaman jelas, dan perubahan UI tidak memecah perilaku fitur.
+ * Aturan khususnya apa:
+ * - Gunakan komponen global tabel/filter/export yang sudah tersedia; hindari duplikasi implementasi per halaman.
+ * - Jaga konsistensi style/theme dan perilaku UX lintas unit.
+ * - Integrasi data harus mengikuti adapter serverQuery/helper global yang sudah ada.
+ */
+
+.procurement-status-tree {
+  --status-card-bg: rgba(255, 255, 255, 0.96);
+  --status-card-border: rgba(241, 90, 34, 0.14);
+  --status-card-shadow: 0 14px 30px rgba(36, 54, 74, 0.08);
+  --status-card-highlight: #fff3ec;
+  --status-text: #24364a;
+  --status-muted: #6f7b8a;
+  --status-accent: #f15a22;
+  --status-done: #1f8f4d;
+  --status-done-bg: rgba(31, 143, 77, 0.12);
+  --status-pending: #b84a1c;
+  --status-pending-bg: rgba(241, 90, 34, 0.13);
+  --status-hover-light: rgba(241, 90, 34, 0.1);
+  --status-hover-dark: #202938;
+  --status-done-left-accent: rgba(241, 90, 34, 0.52);
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  color: var(--status-text);
+
+  .procurement-status-tree__header-card,
+  .procurement-checklist-section,
+  .procurement-status-tree__feedback {
+    border: 1px solid var(--status-card-border);
+    border-radius: 24px;
+    box-shadow: var(--status-card-shadow);
+    background: var(--status-card-bg);
+    overflow: hidden;
+  }
+
+  .procurement-status-tree__header-card {
+    padding: 1.2rem 1.3rem;
+  }
+
+  .procurement-status-tree__mode-card {
+    border: 1px solid var(--status-card-border);
+    border-radius: 22px;
+    box-shadow: var(--status-card-shadow);
+    background: rgba(255, 255, 255, 0.94);
+    padding: 0.95rem 1.05rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .procurement-status-tree__mode-head {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.9rem;
+    flex: 1 1 28rem;
+    min-width: 0;
+    flex-wrap: wrap;
+  }
+
+  .procurement-status-tree__mode-badge,
+  .procurement-status-tree__sync-button {
+    border-radius: 999px;
+    border: 1px solid rgba(36, 54, 74, 0.1);
+    background: rgba(255, 255, 255, 0.98);
+    color: var(--status-text);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.48rem;
+    padding: 0.58rem 0.95rem;
+    font-size: 0.88rem;
+    font-weight: 600;
+    transition: all 0.18s ease;
+  }
+
+  .procurement-status-tree__sync-button:hover:not(:disabled) {
+    border-color: rgba(241, 90, 34, 0.28);
+    color: var(--status-accent);
+    transform: translateY(-1px);
+  }
+
+  .procurement-status-tree__mode-badge {
+    background: var(--status-card-highlight);
+    border-color: rgba(241, 90, 34, 0.2);
+    color: var(--status-accent);
+    box-shadow: inset 0 0 0 1px rgba(241, 90, 34, 0.1);
+    cursor: default;
+  }
+
+  .procurement-status-tree__sync-button:disabled {
+    opacity: 0.75;
+    cursor: not-allowed;
+  }
+
+  .procurement-status-tree__current-chip {
+    margin-top: 0.5rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.42rem 0.72rem;
+    border-radius: 999px;
+    background: rgba(241, 90, 34, 0.1);
+    color: var(--status-text);
+    font-size: 0.84rem;
+    font-weight: 500;
+  }
+
+  .procurement-status-tree__sequence-note {
+    color: var(--status-muted);
+    font-size: 0.84rem;
+    line-height: 1.45;
+    text-align: left;
+    max-width: 42rem;
+  }
+
+  .procurement-status-tree__headline {
+    display: flex;
+    align-items: center;
+    gap: 0.95rem;
+    min-width: 0;
+  }
+
+  .procurement-status-tree__icon-wrap {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 18px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--status-card-highlight);
+    color: var(--status-accent);
+    box-shadow: inset 0 0 0 1px rgba(241, 90, 34, 0.16);
+    flex: 0 0 auto;
+  }
+
+  .procurement-status-tree__eyebrow {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--status-accent);
+    margin-bottom: 0.22rem;
+  }
+
+  .procurement-status-tree__title {
+    margin: 0;
+    font-size: clamp(1rem, 1.3vw, 1.28rem);
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--status-text);
+  }
+
+  .procurement-status-tree__summary {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.65rem;
+  }
+
+  .procurement-status-tree__summary-card {
+    border-radius: 18px;
+    padding: 0.8rem 0.9rem;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: inset 0 0 0 1px rgba(36, 54, 74, 0.06);
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .procurement-status-tree__summary-card .label {
+    font-size: 0.74rem;
+    font-weight: 600;
+    color: var(--status-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .procurement-status-tree__summary-card strong {
+    font-size: 1.05rem;
+    line-height: 1;
+  }
+
+  .procurement-status-tree__feedback {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    min-height: 9rem;
+    font-weight: 500;
+    color: var(--status-muted);
+  }
+
+  .procurement-status-tree__sections {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+
+  .procurement-checklist-section__header,
+  .procurement-checklist-step__header,
+  .procurement-collapse-button {
+    width: 100%;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    text-align: left;
+  }
+
+  .procurement-checklist-section__header {
+    padding: 1rem 1.15rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    border-bottom: 1px solid rgba(36, 54, 74, 0.06);
+  }
+
+  .procurement-checklist-section__identity,
+  .procurement-checklist-step__identity {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    min-width: 0;
+  }
+
+  .procurement-checklist-section__code,
+  .procurement-checklist-step__code,
+  .procurement-checklist-leaf__code {
+    min-width: 2rem;
+    height: 2rem;
+    padding: 0 0.5rem;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--status-card-highlight);
+    color: var(--status-accent);
+    font-weight: 700;
+    box-shadow: inset 0 0 0 1px rgba(241, 90, 34, 0.16);
+    flex: 0 0 auto;
+  }
+
+  .procurement-checklist-section__title,
+  .procurement-checklist-step__title,
+  .procurement-checklist-leaf__title {
+    font-weight: 700;
+    color: var(--status-text);
+  }
+
+  .procurement-checklist-section__copy,
+  .procurement-checklist-step__copy,
+  .procurement-checklist-leaf__title-group {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.24rem;
+  }
+
+  .procurement-checklist-section__meta,
+  .procurement-checklist-step__meta,
+  .procurement-checklist-leaf__meta {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .procurement-level-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    padding: 0.18rem 0.52rem;
+    border-radius: 999px;
+    background: rgba(36, 54, 74, 0.08);
+    color: var(--status-muted);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .procurement-checklist-section__subtitle,
+  .procurement-checklist-step__detail,
+  .procurement-checklist-leaf__detail,
+  .procurement-checklist-leaf__approval {
+    color: var(--status-muted);
+    font-size: 0.88rem;
+    line-height: 1.45;
+  }
+
+  .procurement-checklist-section__body {
+    padding: 1rem 1.1rem 1.15rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .procurement-checklist-section.is-complete {
+    box-shadow:
+      var(--status-card-shadow),
+      inset 3px 0 0 var(--status-done-left-accent),
+      inset 0 0 0 1px rgba(31, 143, 77, 0.14);
+  }
+
+  .procurement-checklist-section.is-active {
+    box-shadow:
+      var(--status-card-shadow),
+      inset 3px 0 0 rgba(241, 90, 34, 0.52),
+      inset 0 0 0 1px rgba(241, 90, 34, 0.18);
+  }
+
+  .procurement-checklist-step {
+    border-radius: 22px;
+    background: rgba(255, 255, 255, 0.88);
+    box-shadow: inset 0 0 0 1px rgba(36, 54, 74, 0.06);
+    overflow: hidden;
+    transition: background-color 140ms ease, box-shadow 140ms ease;
+  }
+
+  .procurement-checklist-step.is-complete {
+    background: linear-gradient(180deg, rgba(232, 247, 237, 0.9), rgba(255, 255, 255, 0.95));
+    box-shadow:
+      inset 3px 0 0 var(--status-done-left-accent),
+      inset 0 0 0 1px rgba(31, 143, 77, 0.14);
+  }
+
+  .procurement-checklist-step.is-active {
+    background: linear-gradient(180deg, rgba(255, 239, 232, 0.9), rgba(255, 255, 255, 0.95));
+    box-shadow:
+      inset 3px 0 0 rgba(241, 90, 34, 0.52),
+      inset 0 0 0 1px rgba(241, 90, 34, 0.14);
+  }
+
+  .procurement-checklist-step:hover {
+    background-color: var(--status-hover-light);
+  }
+
+  .procurement-checklist-step__header {
+    padding: 0.95rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .procurement-checklist-step__summary {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    color: var(--status-muted);
+    flex: 0 0 auto;
+  }
+
+  .procurement-checklist-summary-chip {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    padding: 0.38rem 0.72rem;
+    background: rgba(36, 54, 74, 0.06);
+    color: var(--status-text);
+    font-size: 0.82rem;
+    font-weight: 600;
+  }
+
+  .procurement-checklist-step__body {
+    padding: 0 1rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .procurement-checklist-step__empty-note {
+    color: var(--status-muted);
+    font-size: 0.84rem;
+    font-style: italic;
+  }
+
+  .procurement-checklist-item {
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.92);
+    box-shadow: inset 0 0 0 1px rgba(36, 54, 74, 0.06);
+    padding: 0.78rem 0.84rem;
+    transition: background-color 140ms ease, box-shadow 140ms ease;
+  }
+
+  .procurement-checklist-item.is-complete {
+    background: rgba(232, 247, 237, 0.86);
+    box-shadow:
+      inset 3px 0 0 var(--status-done-left-accent),
+      inset 0 0 0 1px rgba(31, 143, 77, 0.16);
+  }
+
+  .procurement-checklist-item.is-active {
+    background: rgba(255, 239, 232, 0.95);
+    box-shadow:
+      inset 3px 0 0 rgba(241, 90, 34, 0.52),
+      inset 0 0 0 1px rgba(241, 90, 34, 0.16);
+  }
+
+  .procurement-checklist-item:hover {
+    background-color: var(--status-hover-light);
+  }
+
+  .procurement-checklist-item__header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+  }
+
+  .procurement-checklist-item__empty-note {
+    margin-left: 2.6rem;
+    color: var(--status-muted);
+    font-size: 0.84rem;
+    font-style: italic;
+  }
+
+  .procurement-checklist-leaf {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    border-radius: 16px;
+    padding: 0.2rem 0.2rem;
+    transition: background-color 140ms ease, box-shadow 140ms ease;
+  }
+
+  .procurement-checklist-leaf.is-point {
+    padding-left: 0.9rem;
+    border-left: 2px solid rgba(241, 90, 34, 0.24);
+  }
+
+  .procurement-checklist-leaf.is-done {
+    background: rgba(31, 143, 77, 0.05);
+    box-shadow: inset 3px 0 0 var(--status-done-left-accent);
+  }
+
+  .procurement-checklist-leaf.is-pending {
+    background: rgba(255, 255, 255, 0.52);
+  }
+
+  .procurement-checklist-leaf:hover {
+    background: var(--status-hover-light);
+  }
+
+  .procurement-checklist-leaf.is-focus-highlight {
+    box-shadow:
+      inset 3px 0 0 rgba(241, 90, 34, 0.56),
+      0 0 0 1px rgba(241, 90, 34, 0.32);
+    background: rgba(255, 239, 232, 0.92);
+    transition:
+      box-shadow 180ms ease,
+      background-color 180ms ease;
+  }
+
+  .procurement-checklist-leaf__main {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .procurement-checklist-leaf__heading {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.72rem;
+    min-width: 0;
+    flex: 1 1 auto;
+  }
+
+  .procurement-checklist-points {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+    padding-top: 0.15rem;
+  }
+
+  .procurement-status-toggle {
+    border: 1px solid transparent;
+    border-radius: 999px;
+    padding: 0.52rem 0.84rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.42rem;
+    font-weight: 700;
+    flex: 0 0 auto;
+    transition:
+      transform 140ms ease,
+      box-shadow 140ms ease,
+      background-color 140ms ease;
+  }
+
+  .procurement-status-toggle:hover:not(:disabled) {
+    transform: translateY(-1px);
+    border-color: rgba(241, 90, 34, 0.34);
+    background: rgba(241, 90, 34, 0.16);
+    color: #a83f15;
+    box-shadow: 0 8px 18px rgba(241, 90, 34, 0.2);
+  }
+
+  .procurement-status-toggle:focus,
+  .procurement-status-toggle:focus-visible {
+    outline: none;
+    border-color: rgba(241, 90, 34, 0.45);
+    box-shadow: 0 0 0 3px rgba(241, 90, 34, 0.2);
+  }
+
+  .procurement-status-toggle:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+  }
+
+  .procurement-status-toggle.is-done {
+    background: var(--status-done-bg);
+    color: var(--status-done);
+    box-shadow: inset 3px 0 0 var(--status-done-left-accent);
+  }
+
+  .procurement-status-toggle.is-pending {
+    background: var(--status-pending-bg);
+    color: var(--status-pending);
+    border-color: rgba(241, 90, 34, 0.18);
+  }
+
+  .procurement-status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    border-radius: 999px;
+    padding: 0.3rem 0.62rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+  }
+
+  .procurement-status-pill.is-done {
+    background: var(--status-done-bg);
+    color: var(--status-done);
+  }
+
+  .procurement-status-pill.is-pending {
+    background: var(--status-pending-bg);
+    color: var(--status-pending);
+  }
+
+  .procurement-collapse-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.6rem;
+    border-radius: 16px;
+    padding: 0.55rem 0.7rem;
+    background: rgba(255, 255, 255, 0.72);
+    box-shadow: inset 0 0 0 1px rgba(36, 54, 74, 0.06);
+    color: var(--status-muted);
+    transition: background-color 140ms ease, box-shadow 140ms ease;
+  }
+
+  .procurement-collapse-button:hover {
+    background: var(--status-hover-light);
+  }
+}
+
+body.dark-only {
+  .procurement-status-tree {
+    --status-card-bg: rgba(17, 23, 39, 0.96);
+    --status-card-border: rgba(241, 90, 34, 0.26);
+    --status-card-shadow: 0 18px 42px rgba(0, 0, 0, 0.34);
+    --status-card-highlight: rgba(241, 90, 34, 0.22);
+    --status-text: #f4f7fb;
+    --status-muted: #c8d0dc;
+    --status-done-bg: rgba(31, 143, 77, 0.22);
+    --status-pending-bg: rgba(241, 90, 34, 0.24);
+    --status-pending: #ffd5bf;
+
+    .procurement-status-tree__summary-card,
+    .procurement-checklist-step,
+    .procurement-checklist-item,
+    .procurement-collapse-button {
+      background: rgba(17, 23, 39, 0.88);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+    }
+
+    .procurement-checklist-step:hover,
+    .procurement-checklist-item:hover,
+    .procurement-checklist-leaf:hover,
+    .procurement-collapse-button:hover {
+      background: var(--status-hover-dark);
+      color: #ffffff;
+    }
+
+    .procurement-checklist-leaf.is-pending {
+      background: rgba(15, 23, 42, 0.72);
+    }
+
+    .procurement-checklist-leaf.is-done {
+      background: rgba(31, 143, 77, 0.2);
+      box-shadow: inset 3px 0 0 rgba(241, 90, 34, 0.56);
+    }
+
+    .procurement-checklist-leaf.is-focus-highlight {
+      box-shadow:
+        inset 3px 0 0 rgba(241, 90, 34, 0.62),
+        0 0 0 1px rgba(241, 90, 34, 0.26);
+      background: rgba(32, 41, 56, 0.92);
+    }
+
+    .procurement-status-toggle:hover:not(:disabled) {
+      background: rgba(241, 90, 34, 0.22);
+      color: #ffe3d4;
+      box-shadow: 0 10px 22px rgba(0, 0, 0, 0.28);
+    }
+  }
+}
+
+@media (max-width: 991.98px) {
+  .procurement-status-tree {
+    .procurement-status-tree__summary {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      margin-top: 0.85rem;
+    }
+  }
+}
+
+@media (max-width: 767.98px) {
+  .procurement-status-tree {
+    .procurement-status-tree__header-card {
+      padding: 1rem;
+    }
+
+    .procurement-checklist-section__header,
+    .procurement-checklist-step__header,
+    .procurement-checklist-leaf__main {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .procurement-checklist-step__summary,
+    .procurement-status-toggle {
+      align-self: flex-start;
+    }
+
+    .procurement-status-tree__mode-side {
+      justify-content: flex-start;
+    }
+
+    .procurement-status-tree__sequence-note {
+      text-align: left;
+    }
+
+    .procurement-status-tree__summary {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+}
+
+@media (max-width: 575.98px) {
+  .procurement-status-tree {
+    .procurement-status-tree__summary {
+      grid-template-columns: 1fr;
+    }
+
+    .procurement-status-tree__mode-card,
+    .procurement-status-tree__mode-head {
+      gap: 0.7rem;
+    }
+
+    .procurement-status-toggle {
+      width: 100%;
+      justify-content: center;
+    }
+
+    .procurement-checklist-step__summary {
+      width: 100%;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+    }
+  }
+}

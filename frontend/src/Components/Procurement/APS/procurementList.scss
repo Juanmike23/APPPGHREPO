@@ -1,0 +1,183 @@
+/*
+ * PGH-DOC
+ * File: src/Components/Procurement/APS/procurementList.scss
+ * Apa fungsi bagian ini:
+ * - File ini membangun UI/fitur utama yang dilihat user per unit kerja.
+ * Kenapa perlu:
+ * - Perlu agar pengalaman pengguna konsisten, flow antar halaman jelas, dan perubahan UI tidak memecah perilaku fitur.
+ * Aturan khususnya apa:
+ * - Gunakan komponen global tabel/filter/export yang sudah tersedia; hindari duplikasi implementasi per halaman.
+ * - Jaga konsistensi style/theme dan perilaku UX lintas unit.
+ * - Integrasi data harus mengikuti adapter serverQuery/helper global yang sudah ada.
+ */
+
+.procurement-list-page {
+  --procurement-list-bg: transparent;
+  --procurement-list-card: #ffffff;
+  --procurement-list-border: rgba(241, 90, 34, 0.14);
+  --procurement-list-shadow: 0 12px 28px rgba(36, 54, 74, 0.08);
+  --procurement-list-text: #24364a;
+  --procurement-list-muted: #6f7b8a;
+  --procurement-list-accent: #f15a22;
+  --procurement-list-highlight: #fff1e8;
+
+  min-height: calc(100vh - 120px);
+  padding-bottom: 2rem;
+  background: var(--procurement-list-bg);
+
+  .procurement-list-shell {
+    --bs-gutter-x: 0.82rem;
+    --bs-gutter-y: 0.82rem;
+  }
+
+  .project-list > .card {
+    margin-bottom: 0.4rem;
+    border: 1px solid var(--procurement-list-border);
+    border-radius: 24px;
+    box-shadow: var(--procurement-list-shadow);
+    background: var(--procurement-list-card);
+    overflow: hidden;
+  }
+
+  .project-list .header-row {
+    gap: 0.85rem;
+    padding: 1rem 1.35rem;
+    justify-content: center;
+  }
+
+  .project-list .left-side {
+    min-width: 0;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .project-list .border-tab {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    border-bottom: 0;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .project-list .border-tab .nav-item {
+    margin-bottom: 0;
+  }
+
+  .project-list .border-tab .nav-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.42rem;
+    min-width: clamp(9rem, 12vw, 12rem);
+    border: 0;
+    border-radius: 999px;
+    padding: 0.62rem 1rem;
+    font-weight: 600;
+    color: var(--procurement-list-muted);
+    background: transparent;
+    transition:
+      background-color 180ms ease,
+      color 180ms ease,
+      transform 180ms ease,
+      box-shadow 180ms ease;
+  }
+
+  .project-list .border-tab .nav-link .audit-dashboard-tab-text {
+    white-space: nowrap;
+  }
+
+  .project-list .border-tab .nav-link.active,
+  .project-list .border-tab .nav-link:hover {
+    background: var(--procurement-list-highlight);
+    color: var(--procurement-list-accent);
+    box-shadow: inset 0 0 0 1px rgba(241, 90, 34, 0.16);
+    transform: translateY(-1px);
+  }
+
+  .procurement-list-content,
+  .procurement-list-status {
+    width: 100%;
+  }
+
+  .procurement-list-status {
+    margin-top: 0.35rem;
+  }
+
+  a {
+    color: #d2501e;
+    text-decoration-color: rgba(210, 80, 30, 0.45);
+    text-underline-offset: 2px;
+  }
+
+  a:hover,
+  a:focus {
+    color: #f15a22;
+    text-decoration-color: rgba(241, 90, 34, 0.55);
+  }
+}
+
+body.dark-only {
+  .procurement-list-page {
+    .project-list > .card {
+      background: rgba(17, 23, 39, 0.94);
+      border-color: rgba(241, 90, 34, 0.26);
+      box-shadow: 0 18px 42px rgba(0, 0, 0, 0.34);
+    }
+
+    .project-list .border-tab .nav-link {
+      color: #c8d0dc;
+    }
+
+    .project-list .border-tab .nav-link.active,
+    .project-list .border-tab .nav-link:hover {
+      background: rgba(241, 90, 34, 0.26);
+      color: #ffd7c7;
+      box-shadow: inset 0 0 0 1px rgba(241, 90, 34, 0.3);
+    }
+
+    a {
+      color: #ffd7c7;
+      text-decoration-color: rgba(255, 215, 199, 0.5);
+    }
+
+    a:hover,
+    a:focus {
+      color: #ffd7c7;
+      text-decoration-color: rgba(255, 232, 217, 0.55);
+    }
+  }
+}
+
+@media (max-width: 767.98px) {
+  .procurement-list-page {
+    .project-list .border-tab {
+      width: 100%;
+      gap: 0.45rem;
+    }
+
+    .project-list .border-tab .nav-item {
+      flex: 1 1 0;
+      min-width: 0;
+    }
+
+    .project-list .border-tab .nav-link {
+      width: 100%;
+      min-width: 0;
+      justify-content: center;
+      padding: 0.56rem 0.72rem;
+      font-size: 0.86rem;
+    }
+
+    .project-list .header-row .left-side {
+      width: 100%;
+      flex: 1 1 100%;
+    }
+
+    .project-list .header-row {
+      padding: 0.9rem 1rem;
+    }
+  }
+}

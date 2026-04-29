@@ -1,0 +1,307 @@
+/*
+ * PGH-DOC
+ * File: src/assets/scss/theme/_pieChartAudit.scss
+ * Apa fungsi bagian ini:
+ * - File ini mengatur style/theme visual agar tampilan konsisten.
+ * Kenapa perlu:
+ * - Perlu agar pengalaman pengguna konsisten, flow antar halaman jelas, dan perubahan UI tidak memecah perilaku fitur.
+ * Aturan khususnya apa:
+ * - Gunakan komponen global tabel/filter/export yang sudah tersedia; hindari duplikasi implementasi per halaman.
+ * - Jaga konsistensi style/theme dan perilaku UX lintas unit.
+ * - Integrasi data harus mengikuti adapter serverQuery/helper global yang sudah ada.
+ */
+
+@use "sass:list";
+/* =============================================================================
+   PGH ApexCharts + Dropdown Overrides
+   Termasuk: palet PRESENTATION_MUTED_30 + fallback warna legend via nth-child
+============================================================================= */
+
+/* Brand color: oranye default BNI */
+$brand: #F15A22;
+
+/* ==== Palet warna nyaman buat presentasi (Presentation Muted 30) ==== */
+$presentation-muted-30:
+  #4E79A7,#F28E2B,#E15759,#76B7B2,#59A14F,
+  #EDC948,#B07AA1,#FF9DA7,#9C755F,#BAB0AC,
+  #A0CBE8,#FFBE7D,#FF9D9A,#B2DFE0,#8CD17D,
+  #F1CE63,#D4A6C8,#FFBDC5,#D7B5A6,#D7D7D7,
+  #3B5D7A,#C98B4E,#B6474A,#5F9C98,#478645,
+  #D5B74A,#8E5E8A,#D97A8C,#7B6658,#9FA4A7;
+
+/* Fungsi cycle untuk handle seri > panjang palet */
+@function cycle($list, $i) {
+  $len: list.length($list);
+  @return list.nth($list, (($i - 1) % $len) + 1);
+}
+
+/* ===== Dropdown styling ===== */
+.pie-dd { position: relative; width: 100%; }
+
+.pie-dd__toggle {
+  background-color: #fff !important;
+  color: $brand !important;
+  border: 1px solid #dee2e6 !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+
+  &:hover,&:focus,&.show,&:active {
+    background-color: #fff !important;
+    color: $brand !important;
+    border-color: rgba($brand, .35) !important;
+    box-shadow: none !important;
+  }
+}
+
+.pie-dd__count {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: 2rem; height: 1.375rem; padding: 0 .5rem; font-size: .75rem;
+  line-height: 1; background: $brand !important; color: #fff !important;
+  border: 0 !important; border-radius: .5rem; box-shadow: none !important;
+}
+
+/* Menu: aktifkan scroll H & V, border saat hover */
+.pie-dd .dropdown-menu {
+  width: 100%;
+  max-height: 260px;
+  overflow: auto;
+  padding: 0;
+  box-shadow: 0 6px 18px rgba(0,0,0,.08);
+  border: none;
+  transition: border .15s ease;
+}
+.pie-dd .dropdown-menu:hover { border: 1px solid rgba($brand, .35); }
+
+/* Scrollbar tipis & konsisten (H & V) */
+.pie-dd .dropdown-menu { scrollbar-width: thin; scrollbar-color: rgba(0,0,0,.25) transparent; }
+.pie-dd .dropdown-menu::-webkit-scrollbar { width: 4px; height: 4px; }
+.pie-dd .dropdown-menu::-webkit-scrollbar-thumb { background-color: rgba(0,0,0,.25); border-radius: 8px; }
+.pie-dd .dropdown-menu::-webkit-scrollbar-track { background: transparent; }
+
+/* Search sticky */
+.pie-dd__search {
+  position: sticky; top: 0; z-index: 1;
+  background: #fff; padding: .5rem;
+  border-bottom: 1px solid var(--bs-border-color, #dee2e6);
+}
+
+/* Item: text wrap rapi */
+.pie-dd .dropdown-item {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: .5rem;
+  padding: .5rem .75rem;
+  white-space: normal;
+}
+.pie-dd .dropdown-item .text-truncate {
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  text-overflow: clip;
+}
+.pie-dd .dropdown-item.active,
+.pie-dd .dropdown-item:active { background-color: rgba($brand, .08) !important; color: $brand !important; }
+.pie-dd .dropdown-item:hover   { background-color: #f8f9fa; color: inherit; }
+
+body.dark-only {
+  .pie-dd__toggle {
+    background-color: #1e1e2d !important;
+    color: #e2e8f0 !important;
+    border-color: #444a57 !important;
+
+    &:hover,
+    &:focus,
+    &.show,
+    &:active {
+      background-color: #2c2c3b !important;
+      color: #f8fafc !important;
+      border-color: rgba($brand, 0.55) !important;
+    }
+  }
+
+  .pie-dd .dropdown-menu {
+    background: #1e1e2d;
+    border: 1px solid #444a57;
+    box-shadow: 0 18px 32px rgba(0, 0, 0, 0.38);
+  }
+
+  .pie-dd .dropdown-menu:hover {
+    border: 1px solid rgba($brand, 0.5);
+  }
+
+  .pie-dd .dropdown-menu {
+    scrollbar-color: #64748b #2c3442;
+  }
+
+  .pie-dd .dropdown-menu::-webkit-scrollbar-thumb {
+    background-color: #64748b;
+  }
+
+  .pie-dd__search {
+    background: #2c2c3b;
+    border-bottom-color: #444a57;
+  }
+
+  .pie-dd .dropdown-item {
+    color: #e2e8f0;
+  }
+
+  .pie-dd .dropdown-item.active,
+  .pie-dd .dropdown-item:active {
+    background-color: rgba($brand, 0.16) !important;
+    color: #f8fafc !important;
+  }
+
+  .pie-dd .dropdown-item:hover {
+    background-color: rgba($brand, 0.14);
+    color: #f8fafc;
+  }
+}
+
+/* ===== ApexCharts: tooltip border hitam, tanpa shadow ===== */
+.apexcharts-tooltip.apexcharts-theme-light{
+  border:1px solid rgba(0,0,0,.45)!important; border-radius:.5rem!important;
+  box-shadow:none!important; background:#fff!important;
+}
+.apexcharts-tooltip-title{ border-bottom:1px solid rgba(0,0,0,.25)!important; }
+
+/* Axis tooltips */
+.apexcharts-xaxistooltip,.apexcharts-yaxistooltip{
+  border:1px solid rgba(0,0,0,.45)!important; border-radius:.5rem!important;
+  background:#fff!important; box-shadow:none!important; color:inherit!important;
+}
+.apexcharts-xaxistooltip:before{ border-bottom-color:rgba(0,0,0,.45)!important; }
+.apexcharts-xaxistooltip:after { border-bottom-color:#fff!important; }
+.apexcharts-yaxistooltip:before{ border-right-color:rgba(0,0,0,.45)!important; }
+.apexcharts-yaxistooltip:after { border-right-color:#fff!important; }
+
+/* Label chart */
+.apexcharts-data-labels text,.apexcharts-datalabel text,.apexcharts-pie-label{
+  text-shadow:none!important; filter:none!important; stroke:none!important;
+}
+
+/* ===== Legend: indikator & teks terpisah, NO BORDER, pulse lembut saat hover, text wrap ===== */
+.apexcharts-legend{
+  text-align:left!important;
+  align-items:flex-start!important;
+  max-height: 360px;
+  overflow: auto;
+  scrollbar-width: thin; scrollbar-color: rgba(0,0,0,.25) transparent;
+}
+.apexcharts-legend::-webkit-scrollbar { width: 4px; height: 4px; }
+.apexcharts-legend::-webkit-scrollbar-thumb{ background:rgba(0,0,0,.25); border-radius:8px; }
+.apexcharts-legend::-webkit-scrollbar-track{ background:transparent; }
+
+.apexcharts-legend-series{
+  display:flex!important;
+  align-items:flex-start;
+  justify-content:flex-start;
+  gap: 10px;                      /* marker & text terpisah jelas */
+  width:100%;
+  cursor: pointer;
+}
+
+/* Marker: NO border/outline; pakai color dari ApexCharts utk currentColor */
+.apexcharts-legend-marker{
+  position: relative;
+  isolation: isolate;             /* pastikan layer pseudo-element di atas marker */
+  flex: 0 0 14px;
+  width:14px!important; height:14px!important;
+  border: none !important;
+  outline: none !important;
+  border-radius: 4px !important;
+  margin-top: 2px;
+  box-shadow: none !important;
+  /* Penting: jangan override 'color' di sini — agar bisa diisi oleh Apex via JS
+     atau oleh fallback nth-child di bawah. */
+}
+
+/* Bersihkan efek hover lama */
+.apexcharts-legend-series:hover .apexcharts-legend-marker{
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Pseudo-element pulse: gunakan currentColor (stabil) */
+.apexcharts-legend-marker::after{
+  content:'';
+  position:absolute;
+  top:50%; left:50%;
+  width:100%; height:100%;
+  transform: translate(-50%, -50%) scale(1);
+  background-color: currentColor;  /* ⬅️ kunci untuk mengikuti warna seri */
+  border-radius: inherit;
+  opacity: 0;
+  pointer-events: none;
+  filter: blur(3px);
+  z-index: 1;
+}
+
+/* Aktifkan animasi saat hover di SERIES & MARKER (dua-duanya) */
+.apexcharts-legend-series:hover .apexcharts-legend-marker::after,
+.apexcharts-legend-marker:hover::after{
+  animation: legendPulse 1.5s ease-out infinite;
+}
+
+/* FALLBACK: kalau pseudo-element di-skip, animasi box-shadow di marker */
+.apexcharts-legend-series:hover .apexcharts-legend-marker,
+.apexcharts-legend-marker:hover{
+  animation: legendShadow 1.5s ease-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce){
+  .apexcharts-legend-series:hover .apexcharts-legend-marker::after,
+  .apexcharts-legend-marker:hover::after{
+    animation: none;
+    opacity: .35;
+    transform: translate(-50%, -50%) scale(1.5);
+  }
+  .apexcharts-legend-series:hover .apexcharts-legend-marker,
+  .apexcharts-legend-marker:hover{
+    animation: none;
+    box-shadow: none;
+  }
+}
+
+/* Keyframes pulse (glow membesar memudar) */
+@keyframes legendPulse{
+  0%   { opacity: .55; transform: translate(-50%, -50%) scale(1.0); }
+  50%  { opacity: .25; transform: translate(-50%, -50%) scale(1.7); }
+  100% { opacity: 0;    transform: translate(-50%, -50%) scale(2.1); }
+}
+/* Fallback box-shadow pulse */
+@keyframes legendShadow{
+  0%   { box-shadow: 0 0 0 0 rgba(0,0,0,0.18); }
+  60%  { box-shadow: 0 0 0 10px rgba(0,0,0,0); }
+  100% { box-shadow: 0 0 0 10px rgba(0,0,0,0); }
+}
+
+/* Teks legend: hitam + wrap rapi */
+.apexcharts-legend-text{
+  flex: 1 1 auto;
+  display: inline-block;
+  color:#111 !important;
+  font-size: 13px;
+  line-height: 1.25;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  text-overflow: clip;
+  max-width: 240px;
+}
+
+/* ===== Fallback pewarnaan legend via nth-child (jika tidak set options.colors di JS) =====
+   Ini memaksa 'color' & latar marker mengikuti palet PRESENTATION_MUTED_30
+   sehingga currentColor pada ::after selalu sesuai. Cover sampai 60 seri. */
+@for $i from 1 through 60 {
+  .apexcharts-legend
+  .apexcharts-legend-series:nth-child(#{$i})
+  .apexcharts-legend-marker {
+    $c: cycle($presentation-muted-30, $i);
+    color: $c !important;          /* dipakai oleh ::after currentColor */
+    background: $c !important;     /* sinkron tampilan marker */
+  }
+}

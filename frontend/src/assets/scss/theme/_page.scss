@@ -1,0 +1,47 @@
+/*
+ * PGH-DOC
+ * File: src/assets/scss/theme/_page.scss
+ * Apa fungsi bagian ini:
+ * - File ini mengatur style/theme visual agar tampilan konsisten.
+ * Kenapa perlu:
+ * - Perlu agar pengalaman pengguna konsisten, flow antar halaman jelas, dan perubahan UI tidak memecah perilaku fitur.
+ * Aturan khususnya apa:
+ * - Gunakan komponen global tabel/filter/export yang sudah tersedia; hindari duplikasi implementasi per halaman.
+ * - Jaga konsistensi style/theme dan perilaku UX lintas unit.
+ * - Integrasi data harus mengikuti adapter serverQuery/helper global yang sudah ada.
+ */
+
+@use "sass:list";
+@use "../utils/variables" as *;
+/**=====================
+  54. pagination CSS Start
+==========================**/
+/*test Nav bar color */
+$page-name: theme, primary, secondary, success, danger, info, dark, warning;
+$page-color: $primary-color, $primary-color, $secondary-color, $success-color,
+  $danger-color, $light-font, $dark-color, $warning-color;
+@each $var in $page-name {
+  $i: list.index($page-name, $var);
+  .pagination-#{$var} {
+    .page-item {
+      .page-link {
+        color: list.nth($page-color, $i) !important;
+        &:focus {
+          box-shadow: none;
+        }
+      }
+      &.active {
+        .page-link {
+          color: $white !important;
+          background-color: list.nth($page-color, $i) !important;
+          border-color: list.nth($page-color, $i);
+        }
+      }
+    }
+  }
+}
+/**=====================
+  54. pagination CSS Ends
+==========================**/
+
+

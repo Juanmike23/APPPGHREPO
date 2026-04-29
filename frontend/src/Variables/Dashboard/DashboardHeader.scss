@@ -1,0 +1,365 @@
+/*
+ * PGH-DOC
+ * File: src/Variables/Dashboard/DashboardHeader.scss
+ * Apa fungsi bagian ini:
+ * - File ini menyediakan komponen utilitas global (table/chart/filter/cell).
+ * Kenapa perlu:
+ * - Perlu agar pengalaman pengguna konsisten, flow antar halaman jelas, dan perubahan UI tidak memecah perilaku fitur.
+ * Aturan khususnya apa:
+ * - Gunakan komponen global tabel/filter/export yang sudah tersedia; hindari duplikasi implementasi per halaman.
+ * - Jaga konsistensi style/theme dan perilaku UX lintas unit.
+ * - Integrasi data harus mengikuti adapter serverQuery/helper global yang sudah ada.
+ */
+
+@media (max-width: 768px) {
+
+  /* LEFT TABS (3 letters) */
+  .project-list .border-tab .nav-link {
+    .tab-label {
+      display: inline-block;
+      max-width: 3ch;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+
+  /* RIGHT TABS */
+  .project-list .right-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* hide ONLY the text, keep icon visible */
+  .project-list .right-label .right-text {
+    display: none;
+  }
+
+  /* reduce spacing for icon */
+  .project-list .right-label .right-icon {
+    margin: 0;
+    font-size: 16px;
+  }
+}
+
+
+/* DEFAULT (desktop) */
+.label-full {
+  display: inline;
+}
+.label-abbrev {
+  display: none;
+}
+
+/* MOBILE OVERRIDE */
+@media (max-width: 768px) {
+  .label-full {
+    display: none;     /* hide full */
+  }
+  .label-abbrev {
+    display: inline;   /* show custom abbrev */
+  }
+}
+
+
+
+/* Desktop */
+.tab-label-full { display: inline; }
+.tab-label-abbrev { display: none; }
+
+/* Mobile */
+@media (max-width: 768px) {
+  .tab-label-full {
+    display: none;
+  }
+  .tab-label-abbrev {
+    display: inline;
+    font-weight: 500;
+  }
+}
+
+.project-list .dashboard-header-row {
+  row-gap: 0.65rem;
+}
+
+.project-list > .card {
+  margin-bottom: 0.25rem;
+  border: 1px solid rgba(241, 90, 34, 0.14);
+  border-radius: 24px;
+  box-shadow: 0 10px 24px rgba(36, 54, 74, 0.06);
+  background: linear-gradient(180deg, rgba(255, 247, 240, 0.92), rgba(255, 255, 255, 0.98));
+  overflow: hidden;
+}
+
+.project-list .header-row {
+  gap: 0.85rem;
+  padding: 1rem 1.35rem;
+  justify-content: center;
+}
+
+.project-list .left-side {
+  min-width: 0;
+  align-items: center;
+  justify-content: center;
+}
+
+.project-list .border-tab {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  border-bottom: 0;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.project-list .border-tab .nav-item {
+  margin-bottom: 0;
+}
+
+.project-list .dashboard-header-left {
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.project-list .dashboard-header-right {
+  min-width: 0;
+  flex: 0 0 auto;
+  max-width: 100%;
+}
+
+.project-list .dashboard-header-right-content {
+  display: flex;
+  align-items: stretch;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.project-list .dashboard-header-right-lead {
+  display: flex;
+  align-items: center;
+  min-width: clamp(190px, 30vw, 280px);
+}
+
+.project-list .dashboard-pill-switcher {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-items: stretch;
+  gap: 0.5rem;
+  width: auto;
+  max-width: 100%;
+}
+
+.project-list .dashboard-pill-switcher > .dashboard-pill-switcher__tab {
+  margin-left: 0 !important;
+  border-radius: 14px !important;
+}
+
+.project-list .border-tab .nav-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.42rem;
+  min-width: clamp(9.4rem, 13vw, 12.8rem);
+  border: 0;
+  border-radius: 999px;
+  padding: 0.62rem 1rem;
+  font-weight: 600;
+  background: transparent;
+  transition:
+    background-color 180ms ease,
+    color 180ms ease,
+    transform 180ms ease,
+    box-shadow 180ms ease;
+  color: #b25a31;
+}
+
+.project-list .border-tab .nav-link.active,
+.project-list .border-tab .nav-link:hover {
+  background: #fff0e9;
+  color: #f15a22;
+  box-shadow: inset 0 0 0 1px rgba(241, 90, 34, 0.14);
+  transform: translateY(-1px);
+}
+
+.dashboard-pill-switcher .dashboard-pill-switcher__tab.btn-primary,
+.dashboard-pill-switcher .dashboard-pill-switcher__tab.btn-primary:hover,
+.dashboard-pill-switcher .dashboard-pill-switcher__tab.btn-primary:focus,
+.dashboard-pill-switcher .dashboard-pill-switcher__tab.btn-primary:active {
+  border-color: #f15a22 !important;
+  background: linear-gradient(180deg, #f47c4c 0%, #f15a22 100%) !important;
+  color: #ffffff !important;
+  box-shadow: 0 10px 22px rgba(241, 90, 34, 0.22);
+}
+
+.dashboard-pill-switcher .dashboard-pill-switcher__tab.btn-outline-primary {
+  border-color: rgba(241, 90, 34, 0.24) !important;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 247, 240, 0.96) 0%,
+    rgba(255, 255, 255, 0.98) 100%
+  ) !important;
+  color: #b84a1c !important;
+  box-shadow: 0 6px 14px rgba(36, 54, 74, 0.06);
+}
+
+.dashboard-pill-switcher .dashboard-pill-switcher__tab.btn-outline-primary:hover,
+.dashboard-pill-switcher .dashboard-pill-switcher__tab.btn-outline-primary:focus {
+  border-color: rgba(241, 90, 34, 0.45) !important;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 240, 233, 0.98) 0%,
+    rgba(255, 249, 245, 1) 100%
+  ) !important;
+  color: #a83f15 !important;
+}
+
+.dashboard-pill-subtoggle {
+  border-color: rgba(241, 90, 34, 0.2) !important;
+  background: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  color: #b84a1c !important;
+}
+
+.dashboard-pill-subtoggle.btn,
+.dashboard-pill-subtoggle.btn:hover,
+.dashboard-pill-subtoggle.btn:focus,
+.dashboard-pill-subtoggle.btn:active {
+  background: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+
+.dashboard-pill-submenu {
+  border: 1px solid rgba(241, 90, 34, 0.24) !important;
+  box-shadow: 0 12px 26px rgba(36, 54, 74, 0.14) !important;
+}
+
+.dashboard-pill-submenu .dashboard-pill-submenu-item {
+  border-radius: 8px;
+  color: #b84a1c;
+  transition: background-color 140ms ease, color 140ms ease;
+}
+
+.dashboard-pill-submenu .dashboard-pill-submenu-item:hover,
+.dashboard-pill-submenu .dashboard-pill-submenu-item:focus {
+  background: rgba(241, 90, 34, 0.14) !important;
+  color: #9f3e14 !important;
+}
+
+body.dark-only .project-list .border-tab .nav-link {
+  color: #d4dbe7;
+}
+
+body.dark-only .project-list .border-tab .nav-link.active,
+body.dark-only .project-list .border-tab .nav-link:hover {
+  background: rgba(241, 90, 34, 0.2);
+  color: #ffc9aa;
+  box-shadow: inset 0 0 0 1px rgba(241, 90, 34, 0.24);
+}
+
+body.dark-only .project-list > .card {
+  background: rgba(17, 23, 39, 0.94);
+  border-color: rgba(241, 90, 34, 0.18);
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.34);
+}
+
+body.dark-only .dashboard-pill-switcher .dashboard-pill-switcher__tab.btn-outline-primary {
+  border-color: rgba(241, 90, 34, 0.32) !important;
+  background: linear-gradient(
+    180deg,
+    rgba(63, 36, 28, 0.9) 0%,
+    rgba(30, 41, 59, 0.96) 100%
+  ) !important;
+  color: #ffd5bf !important;
+  box-shadow: 0 10px 24px rgba(4, 8, 10, 0.25);
+}
+
+body.dark-only .dashboard-pill-switcher .dashboard-pill-switcher__tab.btn-outline-primary:hover,
+body.dark-only .dashboard-pill-switcher .dashboard-pill-switcher__tab.btn-outline-primary:focus {
+  border-color: rgba(241, 90, 34, 0.55) !important;
+  background: linear-gradient(
+    180deg,
+    rgba(84, 48, 34, 0.95) 0%,
+    rgba(30, 41, 59, 1) 100%
+  ) !important;
+  color: #ffe3d4 !important;
+}
+
+body.dark-only .dashboard-pill-subtoggle {
+  background: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  color: #ffd5bf !important;
+}
+
+body.dark-only .dashboard-pill-subtoggle.btn,
+body.dark-only .dashboard-pill-subtoggle.btn:hover,
+body.dark-only .dashboard-pill-subtoggle.btn:focus,
+body.dark-only .dashboard-pill-subtoggle.btn:active {
+  background: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+
+body.dark-only .dashboard-pill-submenu {
+  border-color: #444a57 !important;
+  background: #1e1e2d !important;
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.36) !important;
+}
+
+body.dark-only .dashboard-pill-submenu .dashboard-pill-submenu-item {
+  color: #e2e8f0 !important;
+}
+
+body.dark-only .dashboard-pill-submenu .dashboard-pill-submenu-item:hover,
+body.dark-only .dashboard-pill-submenu .dashboard-pill-submenu-item:focus {
+  background: rgba(241, 90, 34, 0.14) !important;
+  color: #f8fafc !important;
+}
+
+@media (max-width: 1199.98px) {
+  .project-list .border-tab .nav-link {
+    min-width: clamp(7.2rem, 15vw, 10rem);
+    padding: 0.56rem 0.82rem;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .project-list .dashboard-header-right {
+    flex: 1 1 100%;
+  }
+
+  .project-list .dashboard-header-right-content {
+    justify-content: flex-start;
+  }
+
+  .project-list .dashboard-header-right-lead {
+    min-width: 100%;
+  }
+
+  .project-list .dashboard-pill-switcher {
+    justify-content: flex-start;
+    width: 100%;
+  }
+
+  .project-list .border-tab {
+    justify-content: flex-start;
+  }
+
+  .project-list .border-tab .nav-link {
+    min-width: auto;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .project-list .border-tab .nav-link {
+    min-width: 0;
+  }
+}

@@ -1,0 +1,36 @@
+/*
+ * PGH-DOC
+ * File: src/assets/scss/vendors/font-awesome/_rotated-flipped.scss
+ * Apa fungsi bagian ini:
+ * - File ini mengatur style/theme visual agar tampilan konsisten.
+ * Kenapa perlu:
+ * - Perlu agar pengalaman pengguna konsisten, flow antar halaman jelas, dan perubahan UI tidak memecah perilaku fitur.
+ * Aturan khususnya apa:
+ * - Gunakan komponen global tabel/filter/export yang sudah tersedia; hindari duplikasi implementasi per halaman.
+ * - Jaga konsistensi style/theme dan perilaku UX lintas unit.
+ * - Integrasi data harus mengikuti adapter serverQuery/helper global yang sudah ada.
+ */
+
+@use "variables" as *;
+@use "mixins" as *;
+
+// Rotated & Flipped Icons
+// -------------------------
+
+.#{$fa-css-prefix}-rotate-90  { @include fa-icon-rotate(90deg, 1);  }
+.#{$fa-css-prefix}-rotate-180 { @include fa-icon-rotate(180deg, 2); }
+.#{$fa-css-prefix}-rotate-270 { @include fa-icon-rotate(270deg, 3); }
+
+.#{$fa-css-prefix}-flip-horizontal { @include fa-icon-flip(-1, 1, 0); }
+.#{$fa-css-prefix}-flip-vertical   { @include fa-icon-flip(1, -1, 2); }
+
+// Hook for IE8-9
+// -------------------------
+
+:root .#{$fa-css-prefix}-rotate-90,
+:root .#{$fa-css-prefix}-rotate-180,
+:root .#{$fa-css-prefix}-rotate-270,
+:root .#{$fa-css-prefix}-flip-horizontal,
+:root .#{$fa-css-prefix}-flip-vertical {
+  filter: none;
+}

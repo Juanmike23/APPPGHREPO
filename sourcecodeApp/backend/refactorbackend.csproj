@@ -1,0 +1,39 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<TargetFramework>net10.0</TargetFramework>
+		<AspNetCoreHostingModel>OutOfProcess</AspNetCoreHostingModel>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<UserSecretsId>e7be6a7b-fc79-4f8a-9db4-bd5df2808fa2</UserSecretsId>
+		<UseAppHost Condition="'$(Configuration)' == 'Debug'">false</UseAppHost>
+		<RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+		<EnableDevInternalSigning Condition="'$(EnableDevInternalSigning)' == '' and '$(OS)' == 'Windows_NT'">true</EnableDevInternalSigning>
+		<EnableDevInternalSigning Condition="'$(EnableDevInternalSigning)' == ''">false</EnableDevInternalSigning>
+		<DevSigningSubjectContains Condition="'$(DevSigningSubjectContains)' == ''">PGH Internal Dev Code Signing</DevSigningSubjectContains>
+		<DefaultItemExcludes>$(DefaultItemExcludes);artifacts\**;artifacts/**;bin\**;bin/**;obj\**;obj/**</DefaultItemExcludes>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="AutoMapper" />
+		<PackageReference Include="BCrypt.Net-Next" />
+		<PackageReference Include="EPPlus" />
+		<PackageReference Include="ExcelDataReader" />
+		<PackageReference Include="ExcelDataReader.DataSet" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" />
+		<PackageReference Include="Microsoft.Data.SqlClient" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools">
+		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		  <PrivateAssets>all</PrivateAssets>
+		</PackageReference>
+		<PackageReference Include="Twilio" />
+	</ItemGroup>
+
+	<Target Name="DevInternalSignOutput" AfterTargets="Build" Condition="'$(EnableDevInternalSigning)' == 'true' and '$(OS)' == 'Windows_NT'">
+		<Exec Command="powershell -NoProfile -ExecutionPolicy Bypass -File &quot;$(MSBuildProjectDirectory)\tools\signing\Sign-BackendBuild.ps1&quot; -BuildOutputPath &quot;$(TargetDir).&quot; -SubjectContains &quot;$(DevSigningSubjectContains)&quot;" />
+	</Target>
+
+</Project>

@@ -1,0 +1,20 @@
+node_modules/
+# Don't copy local dependencies
+node_modules
+npm-debug.log
+yarn-error.log
+
+# Ignore local build outputs
+build
+dist
+
+# Ignore Git and config files
+.git
+.gitignore
+Dockerfile
+docker-compose.yml
+
+# Ignore environment and system junk
+.env
+.DS_Store
+.vscode

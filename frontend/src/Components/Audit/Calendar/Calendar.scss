@@ -1,0 +1,24 @@
+/*
+ * PGH-DOC
+ * File: src/Components/Audit/Calendar/Calendar.scss
+ * Apa fungsi bagian ini:
+ * - File ini membangun UI/fitur utama yang dilihat user per unit kerja.
+ * Kenapa perlu:
+ * - Perlu agar pengalaman pengguna konsisten, flow antar halaman jelas, dan perubahan UI tidak memecah perilaku fitur.
+ * Aturan khususnya apa:
+ * - Gunakan komponen global tabel/filter/export yang sudah tersedia; hindari duplikasi implementasi per halaman.
+ * - Jaga konsistensi style/theme dan perilaku UX lintas unit.
+ * - Integrasi data harus mengikuti adapter serverQuery/helper global yang sudah ada.
+ */
+
+/* Minimum height for each day cell */
+.fc-daygrid-day-frame {
+  min-height: 120px;  /* adjust value */
+}
+
+/* Make sure events area can shrink but not disappear */
+.fc-daygrid-day-events {
+  min-height: 40px;
+}
+
+

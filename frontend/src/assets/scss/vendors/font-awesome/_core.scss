@@ -1,0 +1,27 @@
+/*
+ * PGH-DOC
+ * File: src/assets/scss/vendors/font-awesome/_core.scss
+ * Apa fungsi bagian ini:
+ * - File ini mengatur style/theme visual agar tampilan konsisten.
+ * Kenapa perlu:
+ * - Perlu agar pengalaman pengguna konsisten, flow antar halaman jelas, dan perubahan UI tidak memecah perilaku fitur.
+ * Aturan khususnya apa:
+ * - Gunakan komponen global tabel/filter/export yang sudah tersedia; hindari duplikasi implementasi per halaman.
+ * - Jaga konsistensi style/theme dan perilaku UX lintas unit.
+ * - Integrasi data harus mengikuti adapter serverQuery/helper global yang sudah ada.
+ */
+
+@use "variables" as *;
+
+// Base Class Definition
+// -------------------------
+
+.#{$fa-css-prefix} {
+  display: inline-block;
+  font: normal normal normal #{$fa-font-size-base}/#{$fa-line-height-base} FontAwesome; // shortening font declaration
+  font-size: inherit; // can't have font-size inherit on line above, so need to override
+  text-rendering: auto; // optimizelegibility throws things off #1094
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+}

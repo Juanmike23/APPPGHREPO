@@ -1,0 +1,36 @@
+/*
+ * PGH-DOC
+ * File: src/assets/scss/vendors/font-awesome/_larger.scss
+ * Apa fungsi bagian ini:
+ * - File ini mengatur style/theme visual agar tampilan konsisten.
+ * Kenapa perlu:
+ * - Perlu agar pengalaman pengguna konsisten, flow antar halaman jelas, dan perubahan UI tidak memecah perilaku fitur.
+ * Aturan khususnya apa:
+ * - Gunakan komponen global tabel/filter/export yang sudah tersedia; hindari duplikasi implementasi per halaman.
+ * - Jaga konsistensi style/theme dan perilaku UX lintas unit.
+ * - Integrasi data harus mengikuti adapter serverQuery/helper global yang sudah ada.
+ */
+
+@use "variables" as *;
+
+// Icon Sizes
+// -------------------------
+
+/* makes the font 33% larger relative to the icon container */
+.#{$fa-css-prefix}-lg {
+  font-size: calc(4em / 3);
+  line-height: calc(3em / 4);
+  vertical-align: -15%;
+}
+.#{$fa-css-prefix}-2x {
+  font-size: 2em;
+}
+.#{$fa-css-prefix}-3x {
+  font-size: 3em;
+}
+.#{$fa-css-prefix}-4x {
+  font-size: 4em;
+}
+.#{$fa-css-prefix}-5x {
+  font-size: 5em;
+}

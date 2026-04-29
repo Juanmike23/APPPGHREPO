@@ -1,0 +1,36 @@
+/*
+ * PGH-DOC
+ * File: src/assets/scss/sweetalert2-master/_mixins.scss
+ * Apa fungsi bagian ini:
+ * - File ini mengatur style/theme visual agar tampilan konsisten.
+ * Kenapa perlu:
+ * - Perlu agar pengalaman pengguna konsisten, flow antar halaman jelas, dan perubahan UI tidak memecah perilaku fitur.
+ * Aturan khususnya apa:
+ * - Gunakan komponen global tabel/filter/export yang sudah tersedia; hindari duplikasi implementasi per halaman.
+ * - Jaga konsistensi style/theme dan perilaku UX lintas unit.
+ * - Integrasi data harus mengikuti adapter serverQuery/helper global yang sudah ada.
+ */
+
+@use "sass:list";
+
+@mixin ie {
+  @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+    @content;
+  }
+}
+
+// https://stackoverflow.com/a/30250161
+@mixin not($ignor-list...) {
+  @if (list.length($ignor-list) == 1) {
+    $ignor-list: list.nth($ignor-list, 1);
+  }
+
+  $not-output: '';
+  @each $not in $ignor-list {
+    $not-output: $not-output + ':not(#{$not})';
+  }
+
+  &#{$not-output} {
+    @content;
+  }
+}

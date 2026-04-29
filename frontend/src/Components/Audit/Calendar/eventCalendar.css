@@ -1,0 +1,237 @@
+/*
+ * PGH-DOC
+ * File: src/Components/Audit/Calendar/eventCalendar.css
+ * Apa fungsi bagian ini:
+ * - File ini membangun UI/fitur utama yang dilihat user per unit kerja.
+ * Kenapa perlu:
+ * - Perlu agar pengalaman pengguna konsisten, flow antar halaman jelas, dan perubahan UI tidak memecah perilaku fitur.
+ * Aturan khususnya apa:
+ * - Gunakan komponen global tabel/filter/export yang sudah tersedia; hindari duplikasi implementasi per halaman.
+ * - Jaga konsistensi style/theme dan perilaku UX lintas unit.
+ * - Integrasi data harus mengikuti adapter serverQuery/helper global yang sudah ada.
+ */
+
+.audit-calendar-card {
+  overflow: hidden;
+}
+
+.audit-calendar-toolbar {
+  display: grid;
+  grid-template-columns: minmax(10rem, 12rem) minmax(0, 1fr) minmax(16rem, 24rem);
+  align-items: center;
+  gap: 0.9rem;
+  padding: 0.1rem 0 1rem;
+  margin-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.audit-calendar-toolbar__nav,
+.audit-calendar-toolbar__views {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.audit-calendar-toolbar__nav {
+  justify-content: flex-start;
+}
+
+.audit-calendar-toolbar__views {
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+.audit-calendar-toolbar__title {
+  min-width: 0;
+  text-align: center;
+  font-size: clamp(1rem, 0.85rem + 0.4vw, 1.3rem);
+  font-weight: 700;
+  color: #172033;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.audit-calendar-toolbar__icon-btn,
+.audit-calendar-toolbar__today,
+.audit-calendar-toolbar__view-btn {
+  border-radius: 999px !important;
+  border: 1px solid rgba(241, 90, 34, 0.24) !important;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 247, 240, 0.96) 0%,
+    rgba(255, 255, 255, 0.98) 100%
+  ) !important;
+  color: #b84a1c !important;
+  font-weight: 600 !important;
+  box-shadow: none !important;
+}
+
+.audit-calendar-toolbar__icon-btn {
+  width: 2.35rem;
+  min-width: 2.35rem;
+  padding: 0.45rem 0.6rem !important;
+}
+
+.audit-calendar-toolbar__today,
+.audit-calendar-toolbar__view-btn {
+  padding: 0.45rem 0.9rem !important;
+}
+
+.audit-calendar-toolbar__icon-btn:hover,
+.audit-calendar-toolbar__today:hover,
+.audit-calendar-toolbar__view-btn:hover {
+  border-color: rgba(241, 90, 34, 0.45) !important;
+  background: rgba(241, 90, 34, 0.14) !important;
+  color: #a83f15 !important;
+}
+
+.audit-calendar-toolbar__today.is-current,
+.audit-calendar-toolbar__view-btn.is-active {
+  background: linear-gradient(180deg, #f47c4c 0%, #f15a22 100%) !important;
+  border-color: #f15a22 !important;
+  color: #fff !important;
+}
+
+.audit-calendar-card .fc {
+  min-height: 500px;
+}
+
+.audit-calendar-card .fc .fc-daygrid-day-frame {
+  min-height: 6.5rem;
+  border-radius: 8px;
+  transition: background-color 0.16s ease, box-shadow 0.16s ease;
+}
+
+.audit-calendar-card .fc .fc-daygrid-event {
+  border-radius: 10px;
+  padding: 0.2rem 0.4rem;
+}
+
+.audit-calendar-card .fc .fc-daygrid-day:hover .fc-daygrid-day-frame,
+.audit-calendar-card .fc .fc-daygrid-day:focus-within .fc-daygrid-day-frame {
+  background-color: rgba(241, 90, 34, 0.1) !important;
+  box-shadow: inset 0 0 0 1px rgba(241, 90, 34, 0.28);
+}
+
+body.dark-only .audit-calendar-toolbar {
+  border-bottom-color: rgba(148, 163, 184, 0.18);
+}
+
+body.dark-only .audit-calendar-toolbar__title {
+  color: #e5e7eb;
+}
+
+body.dark-only .audit-calendar-toolbar__icon-btn,
+body.dark-only .audit-calendar-toolbar__today,
+body.dark-only .audit-calendar-toolbar__view-btn {
+  background: #1f2937 !important;
+  border-color: rgba(241, 90, 34, 0.34) !important;
+  color: #ffd5bf !important;
+}
+
+body.dark-only .audit-calendar-toolbar__icon-btn:hover,
+body.dark-only .audit-calendar-toolbar__today:hover,
+body.dark-only .audit-calendar-toolbar__view-btn:hover {
+  border-color: rgba(241, 90, 34, 0.55) !important;
+  background: rgba(241, 90, 34, 0.22) !important;
+  color: #ffe3d4 !important;
+}
+
+body.dark-only .audit-calendar-toolbar__today.is-current,
+body.dark-only .audit-calendar-toolbar__view-btn.is-active {
+  color: #fff !important;
+}
+
+body.dark-only .audit-calendar-card .fc .fc-daygrid-day:hover .fc-daygrid-day-frame,
+body.dark-only .audit-calendar-card .fc .fc-daygrid-day:focus-within .fc-daygrid-day-frame {
+  background-color: rgba(241, 90, 34, 0.14) !important;
+  box-shadow: inset 0 0 0 1px rgba(241, 90, 34, 0.32);
+}
+
+.calendar-event-modal .modal-title {
+  font-weight: 700;
+}
+
+.calendar-event-modal .form-label {
+  font-weight: 600;
+  color: #2f2f3b;
+}
+
+.calendar-event-modal .form-control,
+.calendar-event-modal .form-select {
+  border: 1px solid #d9dee7;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #1f2937;
+}
+
+.calendar-event-modal .form-control:focus,
+.calendar-event-modal .form-select:focus {
+  border-color: rgba(241, 90, 34, 0.52);
+  box-shadow: 0 0 0 0.15rem rgba(241, 90, 34, 0.18);
+}
+
+.calendar-event-modal .modal-footer .calendar-event-modal__action {
+  min-width: 94px;
+}
+
+.calendar-event-modal .modal-footer .table-header-action {
+  border-radius: 8px;
+}
+
+body.dark-only .calendar-event-modal .form-label {
+  color: #e2e8f0;
+}
+
+body.dark-only .calendar-event-modal .form-control,
+body.dark-only .calendar-event-modal .form-select {
+  background: #1e1e2d;
+  border-color: #444a57;
+  color: #e2e8f0;
+}
+
+body.dark-only .calendar-event-modal .form-control:focus,
+body.dark-only .calendar-event-modal .form-select:focus {
+  border-color: rgba(241, 90, 34, 0.55);
+  box-shadow: 0 0 0 0.18rem rgba(241, 90, 34, 0.2);
+}
+
+@media (max-width: 991.98px) {
+  .audit-calendar-toolbar {
+    grid-template-columns: 1fr;
+  }
+
+  .audit-calendar-toolbar__nav,
+  .audit-calendar-toolbar__views {
+    justify-content: center;
+  }
+
+  .audit-calendar-toolbar__title {
+    order: -1;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .audit-calendar-toolbar {
+    gap: 0.65rem;
+    padding-bottom: 0.75rem;
+  }
+
+  .audit-calendar-toolbar__nav,
+  .audit-calendar-toolbar__views {
+    width: 100%;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .audit-calendar-toolbar__today,
+  .audit-calendar-toolbar__view-btn {
+    min-height: 2.2rem;
+    padding: 0.4rem 0.72rem !important;
+  }
+
+  .audit-calendar-card .fc .fc-daygrid-day-frame {
+    min-height: 5.6rem;
+  }
+}

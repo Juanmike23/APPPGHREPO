@@ -1,0 +1,104 @@
+/*
+ * PGH-DOC
+ * File: src/assets/scss/owltheme/_theme.default.scss
+ * Apa fungsi bagian ini:
+ * - File ini mengatur style/theme visual agar tampilan konsisten.
+ * Kenapa perlu:
+ * - Perlu agar pengalaman pengguna konsisten, flow antar halaman jelas, dan perubahan UI tidak memecah perilaku fitur.
+ * Aturan khususnya apa:
+ * - Gunakan komponen global tabel/filter/export yang sudah tersedia; hindari duplikasi implementasi per halaman.
+ * - Jaga konsistensi style/theme dan perilaku UX lintas unit.
+ * - Integrasi data harus mengikuti adapter serverQuery/helper global yang sudah ada.
+ */
+
+/*
+ * 	Default theme - Owl Carousel CSS File
+ */
+
+$color-base:			#869791 !default;
+$color-white:			#FFF !default;
+$color-gray:			#D6D6D6 !default;
+
+//nav
+
+$nav-color: 			$color-white !default;
+$nav-color-hover:		$color-white !default;
+$nav-font-size: 		14px !default;
+$nav-rounded: 			3px !default;
+$nav-margin: 			5px !default;
+$nav-padding: 			4px 7px !default;
+$nav-background: 		$color-gray !default;
+$nav-background-hover:	$color-base !default;
+$nav-disabled-opacity: 	0.5 !default;
+
+//dots
+
+$dot-width:				10px !default;
+$dot-height:			10px !default;
+$dot-rounded:			30px !default;
+$dot-margin: 			5px 7px !default;
+$dot-background:		$color-gray !default;
+$dot-background-active:	$color-base !default;
+
+.owl-theme {
+	// Styling Next and Prev buttons
+	.owl-nav {
+		margin-top: 10px;
+		text-align: center;
+		-webkit-tap-highlight-color: transparent;
+
+		[class*='owl-'] {
+			color: $nav-color;
+			font-size: $nav-font-size;
+			margin: $nav-margin;
+			padding: $nav-padding;
+			background: $nav-background;
+			display: inline-block;
+			cursor: pointer;
+			border-radius: 3px;
+
+			&:hover {
+				background: $nav-background-hover;
+				color:$nav-color-hover;
+				text-decoration: none;
+			}
+		}
+		.disabled {
+			opacity: $nav-disabled-opacity;
+			cursor: default;
+		}
+	}
+
+	// Styling dots
+	.owl-nav.disabled + .owl-dots {
+		margin-top: 10px;
+	}
+
+	.owl-dots {
+		text-align: center;
+		-webkit-tap-highlight-color: transparent;
+
+		.owl-dot {
+			display: inline-block;
+			zoom: 1;
+			outline: none;
+			span {
+				width: $dot-width;
+				height: $dot-height;
+				margin: $dot-margin;
+				background: $dot-background;
+				display: block;
+				-webkit-backface-visibility: visible;
+				transition: opacity 200ms ease;
+				border-radius: $dot-rounded;
+			}
+
+			&.active,
+			&:hover {
+				span {
+					background: $dot-background-active;
+				}
+			}
+		}
+	}
+}

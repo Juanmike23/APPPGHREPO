@@ -1,0 +1,531 @@
+/*
+ * PGH-DOC
+ * File: src/assets/scss/theme/_pgh-responsive-global.scss
+ * Apa fungsi bagian ini:
+ * - Menyediakan baseline responsive global lintas unit (layout, table, modal, chart, auth).
+ * Kenapa perlu:
+ * - Supaya perilaku desktop, tablet, dan mobile konsisten tanpa duplikasi style per halaman.
+ * Aturan khususnya apa:
+ * - Gunakan sebagai lapisan override terakhir; hindari hardcode style per unit jika bisa diselesaikan global.
+ * - Tetap mobile-first dan jaga agar komponen data-heavy (table/chart/modal) tidak overflow.
+ */
+
+:root {
+  --pgh-header-height: 82px;
+  --pgh-sidebar-width: 290px;
+  --pgh-content-gutter: 16px;
+}
+
+/* Global utility pills (dipakai lintas halaman, termasuk User Access). */
+.table-toolbar-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  margin-right: 2px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.2;
+  border: 1px solid rgba(29, 41, 57, 0.1);
+  background: rgba(248, 250, 252, 0.95);
+  color: #334155;
+}
+
+.table-toolbar-pill--results {
+  border-color: rgba(245, 158, 11, 0.18);
+  background: rgba(245, 158, 11, 0.08);
+  color: #8a5b00;
+  padding: 6px 12px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+body.dark-only .table-toolbar-pill {
+  border-color: rgba(148, 163, 184, 0.32);
+  background: rgba(30, 41, 59, 0.9);
+  color: #e2e8f0;
+}
+
+body.dark-only .table-toolbar-pill--results {
+  border-color: rgba(245, 158, 11, 0.34);
+  background: rgba(245, 158, 11, 0.18);
+  color: #ffd58a;
+}
+
+html,
+body,
+#root {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.page-wrapper {
+  min-height: 100dvh;
+}
+
+.page-wrapper .page-body-wrapper {
+  min-height: calc(100dvh - var(--pgh-header-height));
+  overflow-x: clip;
+}
+
+.page-wrapper .page-body-wrapper .page-body {
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: hidden;
+  padding-left: var(--pgh-content-gutter);
+  padding-right: var(--pgh-content-gutter);
+}
+
+@media (min-width: 992px) {
+  .page-wrapper .page-body-wrapper .page-body {
+    width: auto !important;
+  }
+}
+
+.layout-outlet-shell {
+  margin-top: -16px;
+}
+
+.page-wrapper .page-body-wrapper .page-body .container-fluid,
+.page-wrapper .page-body-wrapper .page-body .container {
+  max-width: 100%;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.page-main-header .main-header-right {
+  width: 100%;
+  min-width: 0;
+  gap: 10px;
+}
+
+.page-main-header .main-header-right .main-header-left {
+  min-width: 0;
+}
+
+.project-list .header-row {
+  flex-wrap: wrap;
+}
+
+.project-list .dashboard-header-left,
+.project-list .dashboard-header-right,
+.project-list .dashboard-header-right-content {
+  min-width: 0;
+}
+
+.table-content-shell,
+.sticky-table-wrapper,
+.table-responsive {
+  max-width: 100%;
+  min-width: 0;
+}
+
+.table-fullscreen-modal .modal-dialog {
+  max-width: min(98vw, 1920px) !important;
+}
+
+.table-fullscreen-modal .modal-content {
+  width: 100%;
+  max-height: calc(100dvh - 0.7rem);
+  overflow: hidden;
+}
+
+.table-fullscreen-modal .modal-body {
+  overflow: auto;
+}
+
+.change-log-table-shell {
+  max-width: 100%;
+}
+
+.apexcharts-canvas,
+.apexcharts-svg {
+  max-width: 100% !important;
+}
+
+.apexcharts-legend-text {
+  white-space: normal !important;
+  overflow-wrap: anywhere;
+}
+
+.login-card .login-main {
+  max-width: min(100%, 450px);
+}
+
+@media (max-width: 1199.98px) {
+  :root {
+    --pgh-content-gutter: 12px;
+  }
+
+  /*
+   * Legacy sidebar rules from base theme still apply margin/top offsets on tablet.
+   * Normalize here so content area keeps a single mobile/tablet flow.
+   */
+  .page-wrapper.modern-sidebar.compact-wrapper .page-body-wrapper .page-body {
+    margin-top: 0 !important;
+    min-height: calc(100dvh - var(--pgh-header-height)) !important;
+  }
+
+  .page-wrapper.modern-sidebar.compact-wrapper .page-body-wrapper > header.main-nav {
+    top: 0 !important;
+  }
+
+  .page-main-header .main-header-right {
+    gap: 8px;
+  }
+
+  .card .card-header,
+  .card .card-body {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .table-pagination-footer {
+    gap: 8px !important;
+  }
+
+  .table-header__toolbar {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+
+  .table-toolbar-main {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 10px;
+  }
+
+  .table-toolbar-actions,
+  .table-toolbar-edit-actions {
+    width: 100%;
+    min-width: 0;
+    margin-left: 0;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 991.98px) {
+  :root {
+    --pgh-content-gutter: 10px;
+  }
+
+  .page-main-header {
+    position: sticky;
+    top: 0;
+    z-index: 1120;
+    min-height: var(--pgh-header-height);
+  }
+
+  .page-main-header .main-header-right {
+    flex-wrap: wrap;
+    align-items: center;
+    row-gap: 6px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .page-main-header .main-header-right .main-header-left {
+    width: auto;
+    flex: 1 1 auto;
+    border-right: 0;
+    padding: 10px 0;
+  }
+
+  .page-main-header .main-header-right .nav-right {
+    margin-left: auto;
+  }
+
+  /*
+   * Disable legacy "three-dots" collapse behavior for right header actions on mobile.
+   * Keep actions always visible to avoid hidden menu state mismatch.
+   */
+  .page-main-header .main-header-right .nav-right > ul {
+    position: static !important;
+    top: auto !important;
+    left: auto !important;
+    z-index: auto !important;
+    width: auto !important;
+    height: auto !important;
+    padding: 0 !important;
+    transform: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    border-top: 0 !important;
+    box-shadow: none !important;
+    background: transparent !important;
+  }
+
+  .page-main-header .main-header-right > .mobile-toggle {
+    display: none !important;
+  }
+
+  .page-wrapper .page-body-wrapper .page-body {
+    margin-left: 0 !important;
+    width: 100% !important;
+    margin-top: var(--pgh-header-height) !important;
+    min-height: calc(100dvh - var(--pgh-header-height));
+  }
+
+  .page-wrapper.compact-wrapper .page-body-wrapper > header.main-nav,
+  .page-wrapper .page-body-wrapper > header.main-nav {
+    position: fixed !important;
+    top: var(--pgh-header-height) !important;
+    left: 0;
+    bottom: auto !important;
+    width: min(86vw, 320px);
+    max-width: 320px;
+    height: calc(100dvh - var(--pgh-header-height)) !important;
+    transform: translateX(-100%);
+    transition: transform 0.24s ease;
+    z-index: 1110;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+  }
+
+  .page-wrapper.compact-wrapper .page-body-wrapper > header.main-nav:not(.close_icon),
+  .page-wrapper .page-body-wrapper > header.main-nav:not(.close_icon) {
+    transform: translateX(0);
+  }
+
+  /*
+   * Neutralize legacy seam pseudo-element from old sidebar stylesheet.
+   * This is the source of top gap/celah in mobile drawer.
+   */
+  .page-wrapper .page-body-wrapper > header.main-nav::before {
+    content: none !important;
+    display: none !important;
+  }
+
+  /*
+   * Make sidebar drawer itself the single scroll container on mobile.
+   * Avoid nested fixed-height nav-menu from legacy theme that hides scrollbar.
+   */
+  .page-wrapper.compact-wrapper .page-body-wrapper > header.main-nav .main-navbar,
+  .page-wrapper.compact-wrapper .page-body-wrapper > header.main-nav #sidebar-menu,
+  .page-wrapper .page-body-wrapper > header.main-nav .main-navbar,
+  .page-wrapper .page-body-wrapper > header.main-nav #sidebar-menu {
+    height: auto !important;
+    min-height: 100% !important;
+    overflow: visible !important;
+  }
+
+  .page-wrapper .page-body-wrapper > header.main-nav .sidebar-user {
+    padding: 12px 12px 8px !important;
+    margin-bottom: 10px !important;
+  }
+
+  .page-wrapper.compact-wrapper .page-body-wrapper > header.main-nav .main-navbar .nav-menu,
+  .page-wrapper .page-body-wrapper > header.main-nav .main-navbar .nav-menu {
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+    overflow-y: visible !important;
+    padding-top: 0 !important;
+    padding-bottom: 14px !important;
+  }
+
+  .page-wrapper .page-body-wrapper > header.main-nav::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .page-wrapper .page-body-wrapper > header.main-nav::-webkit-scrollbar-track {
+    background: rgba(15, 23, 42, 0.08);
+  }
+
+  .page-wrapper .page-body-wrapper > header.main-nav::-webkit-scrollbar-thumb {
+    background: rgba(241, 90, 34, 0.45);
+    border-radius: 999px;
+  }
+
+  #bg-overlay1 {
+    position: fixed;
+    top: var(--pgh-header-height);
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(2, 6, 23, 0.52);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.22s ease, visibility 0.22s ease;
+    z-index: 1107;
+  }
+
+  #bg-overlay1.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  body.sidebar-mobile-open {
+    overflow: hidden;
+    touch-action: auto;
+    overscroll-behavior: none;
+  }
+
+  .table-fullscreen-modal .modal-dialog {
+    margin: 0 !important;
+    max-width: 100vw !important;
+    width: 100vw !important;
+    min-height: 100dvh !important;
+    height: 100dvh !important;
+  }
+
+  .table-fullscreen-modal .modal-header,
+  .table-fullscreen-modal .modal-body {
+    padding: 0.55rem 0.6rem;
+  }
+
+  .project-list .border-tab {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    justify-content: flex-start;
+    padding-bottom: 2px;
+    scrollbar-width: thin;
+  }
+
+  .project-list .border-tab .nav-item {
+    flex: 0 0 auto;
+  }
+
+  .project-list .border-tab .nav-link {
+    min-width: auto;
+    width: auto;
+  }
+}
+
+@media (max-width: 767.98px) {
+  /*
+   * Global mobile table toolbar normalization:
+   * avoid mixed old fixed-width behavior from legacy Mobile.scss.
+   */
+  .table-toolbar-main {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    row-gap: 8px !important;
+  }
+
+  .table-toolbar-search-group,
+  .table-toolbar-search-inline {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    max-width: 100% !important;
+  }
+
+  .table-toolbar-search,
+  .table-toolbar-scope,
+  .table-toolbar-clear {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+  }
+
+  .table-toolbar-actions,
+  .table-toolbar-edit-actions {
+    width: 100% !important;
+    margin-left: 0 !important;
+    justify-content: flex-start !important;
+    flex-wrap: wrap !important;
+  }
+}
+
+@media (max-width: 767.98px) {
+  :root {
+    --pgh-content-gutter: 6px;
+  }
+
+  .layout-outlet-shell {
+    margin-top: 0;
+  }
+
+  .page-main-header .main-header-right .main-header-left .logo-wrapper img,
+  .page-main-header .main-header-right .main-header-left .dark-logo-wrapper img {
+    max-height: 28px;
+    width: auto;
+  }
+
+  .table-header {
+    gap: 8px;
+  }
+
+  .table-toolbar-main {
+    gap: 8px;
+  }
+
+  .project-list .border-tab {
+    flex-wrap: wrap;
+    overflow-x: visible;
+  }
+
+  .project-list .border-tab .nav-item {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  .project-list .border-tab .nav-link {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .table-pagination-footer {
+    flex-direction: column;
+    align-items: flex-start !important;
+  }
+
+  .page-wrapper .page-body-wrapper .page-body {
+    padding-left: 6px !important;
+    padding-right: 6px !important;
+  }
+
+  .table-pagination-footer__controls {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .change-log-table-shell {
+    max-height: 58dvh;
+  }
+
+  .login-card {
+    padding: 16px 10px;
+  }
+
+  .login-card .login-main {
+    width: 100%;
+    padding: 18px 16px;
+    border-radius: 12px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .page-main-header .main-header-right {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  .page-main-header .main-header-right .nav-right {
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  .table-fullscreen-modal .modal-dialog {
+    margin: 0 !important;
+    max-width: 100vw !important;
+  }
+}
+
+@media (max-width: 390px) {
+  :root {
+    --pgh-content-gutter: 6px;
+  }
+
+  .page-main-header .main-header-right {
+    row-gap: 4px;
+  }
+
+  .page-main-header .main-header-right .nav-right ul {
+    gap: 4px;
+  }
+}

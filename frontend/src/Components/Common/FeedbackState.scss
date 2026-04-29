@@ -1,0 +1,135 @@
+/*
+ * PGH-DOC
+ * File: src/Components/Common/FeedbackState.scss
+ * Apa fungsi bagian ini:
+ * - File ini membangun UI/fitur utama yang dilihat user per unit kerja.
+ * Kenapa perlu:
+ * - Perlu agar pengalaman pengguna konsisten, flow antar halaman jelas, dan perubahan UI tidak memecah perilaku fitur.
+ * Aturan khususnya apa:
+ * - Gunakan komponen global tabel/filter/export yang sudah tersedia; hindari duplikasi implementasi per halaman.
+ * - Jaga konsistensi style/theme dan perilaku UX lintas unit.
+ * - Integrasi data harus mengikuti adapter serverQuery/helper global yang sudah ada.
+ */
+
+.feedback-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 0.55rem;
+  min-height: 176px;
+  padding: 28px 24px;
+  border-radius: 16px;
+  border: 1px dashed rgba(36, 54, 74, 0.16);
+  background:
+    linear-gradient(180deg, rgba(248, 250, 252, 0.98) 0%, rgba(244, 247, 250, 0.94) 100%);
+  color: #24364a;
+}
+
+.feedback-state--compact {
+  min-height: 132px;
+  padding: 20px 18px;
+}
+
+.feedback-state__icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(36, 54, 74, 0.08);
+  color: #24364a;
+}
+
+.feedback-state__title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: inherit;
+}
+
+.feedback-state__description {
+  max-width: 520px;
+  color: rgba(36, 54, 74, 0.76);
+  line-height: 1.5;
+}
+
+.feedback-state__action {
+  margin-top: 0.2rem;
+}
+
+.feedback-state--empty .feedback-state__icon {
+  background: rgba(241, 90, 34, 0.12);
+  color: #f15a22;
+}
+
+.feedback-state--loading .feedback-state__icon {
+  background: rgba(241, 90, 34, 0.12);
+}
+
+.feedback-state--error {
+  border-color: rgba(220, 38, 38, 0.16);
+  background:
+    linear-gradient(180deg, rgba(255, 249, 249, 0.98) 0%, rgba(255, 245, 245, 0.94) 100%);
+}
+
+.feedback-state--error .feedback-state__icon {
+  background: rgba(220, 38, 38, 0.12);
+  color: #b91c1c;
+}
+
+.feedback-state--restricted {
+  border-color: rgba(180, 83, 9, 0.18);
+  background:
+    linear-gradient(180deg, rgba(255, 251, 245, 0.98) 0%, rgba(255, 247, 237, 0.94) 100%);
+}
+
+.feedback-state--restricted .feedback-state__icon {
+  background: rgba(180, 83, 9, 0.12);
+  color: #b45309;
+}
+
+body.dark-only .feedback-state {
+  border-color: rgba(148, 163, 184, 0.16);
+  background:
+    linear-gradient(180deg, rgba(15, 23, 42, 0.9) 0%, rgba(17, 24, 39, 0.88) 100%);
+  color: #f8fafc;
+}
+
+body.dark-only .feedback-state__icon {
+  background: rgba(148, 163, 184, 0.12);
+  color: #f8fafc;
+}
+
+body.dark-only .feedback-state__description {
+  color: rgba(226, 232, 240, 0.82);
+}
+
+body.dark-only .feedback-state--empty .feedback-state__icon,
+body.dark-only .feedback-state--loading .feedback-state__icon {
+  background: rgba(241, 90, 34, 0.2);
+  color: #ffd7c7;
+}
+
+body.dark-only .feedback-state--error {
+  border-color: rgba(248, 113, 113, 0.18);
+  background:
+    linear-gradient(180deg, rgba(38, 14, 18, 0.92) 0%, rgba(28, 12, 16, 0.9) 100%);
+}
+
+body.dark-only .feedback-state--error .feedback-state__icon {
+  background: rgba(248, 113, 113, 0.14);
+  color: #fca5a5;
+}
+
+body.dark-only .feedback-state--restricted {
+  border-color: rgba(251, 191, 36, 0.18);
+  background:
+    linear-gradient(180deg, rgba(43, 24, 7, 0.92) 0%, rgba(34, 20, 8, 0.9) 100%);
+}
+
+body.dark-only .feedback-state--restricted .feedback-state__icon {
+  background: rgba(251, 191, 36, 0.14);
+  color: #fbbf24;
+}

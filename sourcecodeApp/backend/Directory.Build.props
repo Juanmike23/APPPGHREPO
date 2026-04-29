@@ -1,0 +1,7 @@
+<Project>
+  <PropertyGroup Condition="'$(OS)' == 'Windows_NT' and '$(UseTrustedLocalBuildOutput)' != 'false'">
+    <BaseOutputPath>$(MSBuildThisFileDirectory)..\..\..\_artifacts\backend\bin\</BaseOutputPath>
+    <BaseIntermediateOutputPath>$(MSBuildThisFileDirectory)..\..\..\_artifacts\backend\obj\</BaseIntermediateOutputPath>
+    <MSBuildProjectExtensionsPath>$(MSBuildThisFileDirectory)..\..\..\_artifacts\backend\obj\</MSBuildProjectExtensionsPath>
+  </PropertyGroup>
+</Project>

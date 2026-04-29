@@ -1,0 +1,26 @@
+/*
+ * PGH-DOC
+ * File: src/assets/scss/vendors/font-awesome/_path.scss
+ * Apa fungsi bagian ini:
+ * - File ini mengatur style/theme visual agar tampilan konsisten.
+ * Kenapa perlu:
+ * - Perlu agar pengalaman pengguna konsisten, flow antar halaman jelas, dan perubahan UI tidak memecah perilaku fitur.
+ * Aturan khususnya apa:
+ * - Gunakan komponen global tabel/filter/export yang sudah tersedia; hindari duplikasi implementasi per halaman.
+ * - Jaga konsistensi style/theme dan perilaku UX lintas unit.
+ * - Integrasi data harus mengikuti adapter serverQuery/helper global yang sudah ada.
+ */
+
+@use "variables" as *;
+
+/* FONT PATH
+ * -------------------------- */
+
+@font-face {
+  font-family: 'FontAwesome';
+  src: url('#{$fa-font-path}/font-awesome/fontawesome-webfont.woff2?v=#{$fa-version}') format('woff2'),
+    url('#{$fa-font-path}/font-awesome/fontawesome-webfont.woff?v=#{$fa-version}') format('woff');
+//  src: url('#{$fa-font-path}/FontAwesome.otf') format('opentype'); // used when developing fonts
+  font-weight: normal;
+  font-style: normal;
+}

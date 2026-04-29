@@ -1,0 +1,229 @@
+/*
+ * PGH-DOC
+ * File: src/assets/scss/theme/_datatable.scss
+ * Apa fungsi bagian ini:
+ * - File ini mengatur style/theme visual agar tampilan konsisten.
+ * Kenapa perlu:
+ * - Perlu agar pengalaman pengguna konsisten, flow antar halaman jelas, dan perubahan UI tidak memecah perilaku fitur.
+ * Aturan khususnya apa:
+ * - Gunakan komponen global tabel/filter/export yang sudah tersedia; hindari duplikasi implementasi per halaman.
+ * - Jaga konsistensi style/theme dan perilaku UX lintas unit.
+ * - Integrasi data harus mengikuti adapter serverQuery/helper global yang sudah ada.
+ */
+
+@use "../utils/variables" as *;
+/**=====================
+  23. Data-table CSS Start
+==========================**/
+$table-border-soft-light: rgba($color-fiord, 0.16);
+$table-border-soft-light-strong: rgba($color-fiord, 0.24);
+
+.table {
+  > :not(caption) > * > * {
+    border-bottom-color: $table-border-soft-light;
+  }
+
+  thead th,
+  > :not(:last-child) > :last-child > * {
+    border-bottom-color: $table-border-soft-light-strong;
+  }
+}
+
+.table-bordered {
+  td,
+  th {
+    border-color: $table-border-soft-light;
+  }
+}
+
+.rdt_Table {
+  border: 1px solid $table-border-soft-light;
+}
+.rdt_TableCol {
+  font-size: 14px !important;
+  font-weight: 700 !important;
+}
+
+
+// .rdt_TableCell {
+//   overflow: hidden;
+//   text-overflow: ellipsis;
+//   white-space: nowrap;
+//   border : 1px solid #ddd
+// }
+
+// .rdt_TableCol:first-child, .rdt_TableCell:first-child {
+//   padding-left: 24px;
+//   min-width: 180px; // Adjust based on expected length
+// }
+
+// .rdt_TableHead {
+//   position: sticky;
+//   top: 0;
+//   z-index: 100;
+//   background-color: white;
+// }
+
+
+
+// /* === FROZEN HEADER (3rd column) === */
+// .rdt_TableCol:nth-child(3) {
+//    position: sticky;
+//   top: 0;
+//   left: 60px;
+//   z-index: 10; // ensure it's always above cells
+//   background: white; // must be set to overlay body cells
+// }
+
+// /* === FROZEN CELLS (3rd column) === */
+// .rdt_TableCell:nth-child(3) {
+//   position: sticky;
+//   left: 60px;
+//   z-index: 2; // stay below header
+//   background: inherit; // or background: white;
+
+// }
+
+
+
+
+.rdt_TableHeader {
+  height: auto;
+  line-height: unset;
+  background: $transparent-color;
+  > div {
+    &:last-child {
+      background-color: rgba($primary-color, 0.05) !important;
+    }
+  }
+}
+.datatable-react {
+  .form-control,
+  .react-bootstrap-table {
+    margin-bottom: 30px;
+  }
+  .react-bootstrap-table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    .table-bordered {
+      td,
+      th {
+        border-color: $table-border-soft-light;
+      }
+    }
+    table {
+      tbody {
+        tr {
+          &:nth-child(odd) {
+            background-color: #f9f9f9;
+            td {
+              &:first-child {
+                background-color: #f6f6f6;
+              }
+            }
+            &:hover {
+              td {
+                background-color: rgba($primary-color, 0.10);
+                color: var(--theme-default);
+              }
+            }
+          }
+          &:nth-child(even) {
+            td {
+              &:first-child {
+                background-color: #fafafa;
+              }
+            }
+            &:hover {
+              td {
+                background-color: rgba($primary-color, 0.10);
+                color: var(--theme-default);
+                &:first-child {
+                  background-color: rgba($primary-color, 0.14);
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+body.dark-only {
+  .react-bootstrap-table {
+    table {
+      tbody {
+        tr {
+          &:hover {
+            td {
+              background-color: $dark-body-background;
+              color: $white;
+
+              &:first-child {
+                background-color: $dark-body-background;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+div {
+  &.dt-button-background {
+    display: none !important;
+  }
+}
+.toolbar {
+  padding: 5px 15px;
+  background-color: var(--theme-default);
+  display: inline-block;
+  color: $white;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  margin-right: 15px;
+}
+code {
+  &.option {
+    color: $danger-color !important;
+  }
+  &.api {
+    color: $success-color !important;
+  }
+}
+.product-table {
+  th {
+    &:last-child {
+      min-width: 120px;
+    }
+  }
+  h6 {
+    font-weight: 600;
+    color: $dark-color;
+  }
+}
+.support-table {
+  .rdt_TableHeader {
+    display: none;
+  }
+  .rdt_Table {
+    .rdt_TableBody {
+      .rdt_TableCell {
+        img {
+          border-radius: 100%;
+        }
+        &:nth-child(5) {
+          > div {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+}
+/**=====================
+  23. Data-table CSS Ends
+==========================**/

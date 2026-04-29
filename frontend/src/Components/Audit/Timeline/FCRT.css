@@ -1,0 +1,654 @@
+/*
+ * PGH-DOC
+ * File: src/Components/Audit/Timeline/FCRT.css
+ * Apa fungsi bagian ini:
+ * - File ini membangun UI/fitur utama yang dilihat user per unit kerja.
+ * Kenapa perlu:
+ * - Perlu agar pengalaman pengguna konsisten, flow antar halaman jelas, dan perubahan UI tidak memecah perilaku fitur.
+ * Aturan khususnya apa:
+ * - Gunakan komponen global tabel/filter/export yang sudah tersedia; hindari duplikasi implementasi per halaman.
+ * - Jaga konsistensi style/theme dan perilaku UX lintas unit.
+ * - Integrasi data harus mengikuti adapter serverQuery/helper global yang sudah ada.
+ */
+
+/* Keep the FullCalendar toolbar aligned and readable */
+.fc .fc-toolbar.fc-header-toolbar {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  gap: 0.85rem !important;
+  margin-bottom: 0.9rem !important;
+  padding: 0 0.15rem !important;
+  flex-wrap: wrap !important;
+}
+
+.fc .fc-toolbar-chunk {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.5rem;
+  flex-wrap: wrap !important;
+}
+
+.fc .fc-button-group {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.35rem;
+}
+
+.fc .fc-button-group > .fc-button {
+  margin: 0 !important;
+  border-radius: 999px !important;
+}
+
+/* Biar title ga bikin baris baru */
+.fc .fc-toolbar-title {
+  display: inline-block !important;
+  margin: 0 0.5rem !important;
+  white-space: nowrap;
+  font-size: clamp(1rem, 0.75rem + 0.55vw, 1.35rem) !important;
+  font-weight: 700 !important;
+  color: #1f2937;
+}
+
+.fc-today-highlight {
+  background-color: rgba(255, 0, 0, 0.15) !important;
+  border-left: 2px solid red;
+  border-right: 2px solid red;
+}
+
+
+
+/* Default button */
+/* Default (looks like disabled) */
+#timeline-container .fc .fc-button {
+  background-color: #fff4ef !important;
+  border: 1px solid rgba(241, 90, 34, 0.28) !important;
+  color: #b84a1c !important;
+  opacity: 1 !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease;
+}
+
+/* Hover (only if not actually disabled) */
+#timeline-container .fc .fc-button:hover:not(:disabled) {
+  background-color: rgba(241, 90, 34, 0.14) !important;
+  border-color: rgba(241, 90, 34, 0.5) !important;
+  color: #a83f15 !important;
+  opacity: 1 !important;
+}
+
+/* Active / toggled */
+#timeline-container .fc .fc-button.fc-button-active {
+  background: linear-gradient(180deg, #f47c4c 0%, #f15a22 100%) !important;
+  color: #fff !important;
+  border: 1px solid #f15a22 !important;
+  opacity: 1 !important;
+}
+
+
+
+
+/* Allow resource titles to wrap instead of staying in one line */
+.fc .fc-datagrid-cell-cushion {
+  white-space: normal !important;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.fc-datagrid-cell-main {
+  white-space: normal !important;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  line-height: 1.35;
+}
+
+
+.fc-datagrid-cell {
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+
+/* Vertically center resource titles in the left column */
+.fc-datagrid-cell .fc-datagrid-cell-frame,
+.fc-datagrid-cell-main {
+  display: flex !important;
+  align-items: center !important;   /* ← vertical align middle */
+}
+
+.fc-datagrid-cell .fc-datagrid-cell-frame {
+  min-height: 48px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+
+
+/* left padding margin in the  full calendar headder*/
+/* 
+.fc-header-toolbar {
+  padding-left: 120px;   
+
+*/
+
+/* 
+.fc-now-indicator-line {
+  pointer-events: auto !important;
+}
+
+
+.fc-resourceTimelineQuarter-view .fc-timeline-now-indicator-line {
+  
+}
+
+
+.fc-resourceTimelineYear-view
+.fc-timeline-now-indicator-line,
+.fc-resourceTimelineYear-view
+.fc-timeline-now-indicator-arrow {
+  transform: translateX(35px);
+}
+
+
+
+.fc-resourceTimelineMonth-view .fc-timeline-now-indicator-line,
+.fc-resourceTimelineWeek-view .fc-timeline-now-indicator-line {
+  
+} */
+
+.btn-text-stroke {
+  color: white; /* text fill */
+
+  /* real stroke (Chrome, Edge, Safari) */
+  -webkit-text-stroke: 1px black;
+
+  /* fallback (Firefox) */
+  text-shadow:
+    -0.5px -0.5px 0 #000,
+     0.5px -0.5px 0 #000,
+    -0.5px  0.5px 0 #000,
+     0.5px  0.5px 0 #000;
+}
+
+
+/* 
+
+.fc-timeline-event {
+  padding: 0 !important;
+}
+
+
+.fc-event-main {
+  width: 6px;         
+  margin: 0 auto;     
+  border-radius: 3px;
+} 
+  */
+
+  .fc-event-main-frame {
+  pointer-events: none;
+}
+
+.fc-event-main {
+  pointer-events: auto;
+}
+/* Allow visual shrinking of timeline events */
+.fc-timeline .fc-h-event {
+  width: auto !important;
+  left: 0 !important;
+  right: 0 !important;
+}
+
+/* Keep hitbox but stop flex stretch */
+.fc-timeline .fc-event-main-frame {
+  flex: 0 0 auto !important;
+}
+#timeline-container {
+  position: relative;
+  overflow: hidden;
+}
+
+#timeline-container .popover {
+  max-width: 320px;
+  pointer-events: auto;
+}
+
+body .audit-timeline-popover.popover {
+  max-width: min(320px, calc(100vw - 24px));
+  z-index: 1085;
+  pointer-events: auto;
+}
+
+#timeline-container.timeline-fullscreen {
+  padding: 1rem !important;
+}
+
+body.dark-only #timeline-container.timeline-fullscreen {
+  background: #1d2430 !important;
+}
+
+.timeline-toolbar {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.timeline-toolbar__heading {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+.timeline-summary-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+.timeline-calendar-toolbar {
+  display: grid;
+  grid-template-columns: minmax(10rem, 12rem) minmax(0, 1fr) minmax(16rem, 24rem);
+  align-items: center;
+  gap: 0.9rem;
+  padding: 0.1rem 0 1rem;
+  margin-bottom: 0.75rem;
+  border-top: 1px solid rgba(15, 23, 42, 0.08);
+  border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.timeline-calendar-toolbar__nav,
+.timeline-calendar-toolbar__views {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.timeline-calendar-toolbar__nav {
+  justify-content: flex-start;
+}
+
+.timeline-calendar-toolbar__views {
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+.timeline-calendar-toolbar__title {
+  min-width: 0;
+  text-align: center;
+  font-size: clamp(1rem, 0.85rem + 0.4vw, 1.3rem);
+  font-weight: 700;
+  color: #172033;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.timeline-calendar-toolbar__icon-btn,
+.timeline-calendar-toolbar__today,
+.timeline-calendar-toolbar__view-btn {
+  border-radius: 999px !important;
+  border: 1px solid rgba(241, 90, 34, 0.24) !important;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 247, 240, 0.96) 0%,
+    rgba(255, 255, 255, 0.98) 100%
+  ) !important;
+  color: #b84a1c !important;
+  font-weight: 600 !important;
+  box-shadow: none !important;
+}
+
+.timeline-calendar-toolbar__icon-btn {
+  width: 2.35rem;
+  min-width: 2.35rem;
+  padding: 0.45rem 0.6rem !important;
+}
+
+.timeline-calendar-toolbar__today,
+.timeline-calendar-toolbar__view-btn {
+  padding: 0.45rem 0.9rem !important;
+}
+
+.timeline-calendar-toolbar__icon-btn:hover,
+.timeline-calendar-toolbar__today:hover,
+.timeline-calendar-toolbar__view-btn:hover {
+  border-color: rgba(241, 90, 34, 0.45) !important;
+  background: rgba(241, 90, 34, 0.14) !important;
+  color: #a83f15 !important;
+}
+
+.timeline-calendar-toolbar__today.is-current,
+.timeline-calendar-toolbar__view-btn.is-active {
+  background: linear-gradient(180deg, #f47c4c 0%, #f15a22 100%) !important;
+  border-color: #f15a22 !important;
+  color: #ffffff !important;
+}
+
+.timeline-summary-button {
+  min-height: 2.25rem;
+  padding: 0.45rem 0.8rem !important;
+  white-space: nowrap;
+  border-radius: 999px !important;
+  border: 1px solid rgba(241, 90, 34, 0.24) !important;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 247, 240, 0.96) 0%,
+    rgba(255, 255, 255, 0.98) 100%
+  ) !important;
+  color: #b84a1c !important;
+  box-shadow: 0 6px 14px rgba(36, 54, 74, 0.06);
+  transition: background-color 0.18s ease, border-color 0.18s ease, color 0.18s ease !important;
+}
+
+.timeline-summary-button:hover,
+.timeline-summary-button:focus {
+  border-color: rgba(241, 90, 34, 0.45) !important;
+  background: rgba(241, 90, 34, 0.14) !important;
+  color: #a83f15 !important;
+}
+
+.timeline-summary-button.is-active {
+  border-color: #f15a22 !important;
+  background: linear-gradient(180deg, #f47c4c 0%, #f15a22 100%) !important;
+  color: #ffffff !important;
+  box-shadow: 0 10px 22px rgba(241, 90, 34, 0.22);
+}
+
+.timeline-mode-toggle {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 0.85rem !important;
+  border: 1px solid rgba(241, 90, 34, 0.45) !important;
+  background: rgba(241, 90, 34, 0.1) !important;
+  color: #c94a19 !important;
+  font-weight: 700 !important;
+  box-shadow: inset 0 0 0 1px rgba(241, 90, 34, 0.08);
+}
+
+.timeline-mode-toggle:hover,
+.timeline-mode-toggle:focus {
+  background: rgba(241, 90, 34, 0.16) !important;
+  color: #ad3f15 !important;
+  border-color: rgba(241, 90, 34, 0.6) !important;
+}
+
+.timeline-mode-toggle.active {
+  background: linear-gradient(180deg, #f47c4c 0%, #f15a22 100%) !important;
+  color: #ffffff !important;
+  border-color: #f15a22 !important;
+  box-shadow: 0 8px 18px rgba(241, 90, 34, 0.22);
+}
+
+.timeline-mode-toggle svg {
+  flex: 0 0 auto;
+}
+
+.timeline-mode-toggle__status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.25rem;
+  padding: 0.15rem 0.45rem;
+  border-radius: 999px;
+  background: rgba(241, 90, 34, 0.14);
+  color: inherit;
+  font-size: 0.7rem;
+  line-height: 1;
+  letter-spacing: 0.04em;
+}
+
+.timeline-mode-toggle.active .timeline-mode-toggle__status {
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+
+body.dark-only .timeline-mode-toggle {
+  background: rgba(241, 90, 34, 0.14) !important;
+  color: #ffb08f !important;
+  border-color: rgba(241, 90, 34, 0.55) !important;
+}
+
+body.dark-only .timeline-mode-toggle:hover,
+body.dark-only .timeline-mode-toggle:focus {
+  background: rgba(241, 90, 34, 0.22) !important;
+  color: #ffd3c2 !important;
+}
+
+body.dark-only .timeline-mode-toggle.active {
+  background: linear-gradient(180deg, #f47c4c 0%, #f15a22 100%) !important;
+  color: #ffffff !important;
+  border-color: #f15a22 !important;
+}
+
+body.dark-only .timeline-calendar-toolbar__icon-btn,
+body.dark-only .timeline-calendar-toolbar__today,
+body.dark-only .timeline-calendar-toolbar__view-btn {
+  background: #1f2937 !important;
+  border-color: rgba(241, 90, 34, 0.34) !important;
+  color: #ffd5bf !important;
+}
+
+body.dark-only .timeline-calendar-toolbar__icon-btn:hover,
+body.dark-only .timeline-calendar-toolbar__today:hover,
+body.dark-only .timeline-calendar-toolbar__view-btn:hover {
+  border-color: rgba(241, 90, 34, 0.55) !important;
+  background: rgba(241, 90, 34, 0.22) !important;
+  color: #ffe3d4 !important;
+}
+
+body.dark-only .timeline-calendar-toolbar__today.is-current,
+body.dark-only .timeline-calendar-toolbar__view-btn.is-active {
+  color: #fff !important;
+}
+
+body.dark-only .timeline-summary-button {
+  border-color: rgba(241, 90, 34, 0.32) !important;
+  background: linear-gradient(
+    180deg,
+    rgba(63, 36, 28, 0.9) 0%,
+    rgba(30, 41, 59, 0.96) 100%
+  ) !important;
+  color: #ffd5bf !important;
+  box-shadow: 0 10px 24px rgba(4, 8, 10, 0.25);
+}
+
+body.dark-only .timeline-summary-button:hover,
+body.dark-only .timeline-summary-button:focus {
+  border-color: rgba(241, 90, 34, 0.55) !important;
+  background: rgba(241, 90, 34, 0.22) !important;
+  color: #ffe3d4 !important;
+}
+
+body.dark-only .timeline-summary-button.is-active {
+  border-color: #f15a22 !important;
+  background: linear-gradient(180deg, #f47c4c 0%, #f15a22 100%) !important;
+  color: #ffffff !important;
+}
+
+@media (max-width: 1199px) {
+  .timeline-toolbar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .timeline-summary-buttons {
+    justify-content: flex-start;
+  }
+
+  .timeline-calendar-toolbar {
+    grid-template-columns: 1fr;
+  }
+
+  .timeline-calendar-toolbar__nav,
+  .timeline-calendar-toolbar__views {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 767px) {
+  .timeline-summary-buttons {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
+    width: 100%;
+  }
+
+  .timeline-summary-button {
+    width: 100%;
+    justify-content: center;
+    min-height: 2.4rem;
+    padding: 0.45rem 0.65rem !important;
+  }
+
+  .timeline-summary-button__label {
+    font-size: 0.82rem;
+  }
+
+  .timeline-mode-toggle {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .timeline-calendar-toolbar__nav,
+  .timeline-calendar-toolbar__views {
+    flex-wrap: wrap;
+  }
+
+  .timeline-calendar-toolbar__title {
+    white-space: normal;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .timeline-calendar-toolbar {
+    gap: 0.65rem;
+    padding-bottom: 0.75rem;
+  }
+
+  .timeline-calendar-toolbar__nav,
+  .timeline-calendar-toolbar__views {
+    width: 100%;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .timeline-calendar-toolbar__today,
+  .timeline-calendar-toolbar__view-btn {
+    min-height: 2.2rem;
+    padding: 0.4rem 0.72rem !important;
+  }
+
+  .timeline-summary-buttons {
+    grid-template-columns: 1fr;
+  }
+
+  .timeline-mode-toggle {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* ===============================
+   Compact resource titles (zoomed out)
+   =============================== */
+
+.compact-resources .fc-datagrid-cell-main {
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  max-width: 100%;          /* adjust to taste */
+}
+
+/* Keep vertical centering */
+.compact-resources
+.fc-datagrid-cell .fc-datagrid-cell-frame {
+  display: flex;
+  align-items: center;
+}
+
+/* Stable toolbar/button overrides for audit timeline */
+#timeline-container .fc .fc-button {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-height: 2.35rem !important;
+  padding: 0.45rem 0.95rem !important;
+  background-color: #fff4ef !important;
+  border: 1px solid rgba(241, 90, 34, 0.28) !important;
+  color: #c74c1d !important;
+  opacity: 1 !important;
+  cursor: pointer !important;
+  box-shadow: none !important;
+  transition:
+    background-color 0.18s ease,
+    border-color 0.18s ease,
+    color 0.18s ease,
+    transform 0.18s ease,
+    opacity 0.18s ease !important;
+}
+
+#timeline-container .fc .fc-button:hover:not(:disabled) {
+  background-color: rgba(241, 90, 34, 0.14) !important;
+  border-color: rgba(241, 90, 34, 0.5) !important;
+  color: #a83f15 !important;
+  transform: translateY(-1px);
+}
+
+#timeline-container .fc .fc-button:focus-visible {
+  outline: none !important;
+  box-shadow: 0 0 0 3px rgba(241, 90, 34, 0.18) !important;
+}
+
+#timeline-container .fc .fc-button.fc-button-active {
+  background: linear-gradient(180deg, #f47c4c 0%, #f15a22 100%) !important;
+  color: #fff !important;
+  border-color: #f15a22 !important;
+}
+
+#timeline-container .fc .fc-button:disabled {
+  background-color: #f7f7f8 !important;
+  border-color: rgba(148, 163, 184, 0.32) !important;
+  color: #94a3b8 !important;
+  opacity: 0.72 !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+}
+
+body.dark-only #timeline-container .fc .fc-toolbar-title {
+  color: #f8fafc;
+}
+
+body.dark-only #timeline-container .fc .fc-button {
+  background-color: rgba(241, 90, 34, 0.14) !important;
+  border-color: rgba(241, 90, 34, 0.38) !important;
+  color: #ffd5bf !important;
+}
+
+body.dark-only #timeline-container .fc .fc-button:hover:not(:disabled),
+body.dark-only #timeline-container .fc .fc-button.fc-button-active {
+  background: linear-gradient(180deg, #f47c4c 0%, #f15a22 100%) !important;
+  border-color: #f15a22 !important;
+  color: #ffffff !important;
+}
+
+body.dark-only #timeline-container .fc .fc-button:disabled {
+  background-color: rgba(51, 65, 85, 0.5) !important;
+  border-color: rgba(148, 163, 184, 0.2) !important;
+  color: rgba(203, 213, 225, 0.55) !important;
+}
+
+body.dark-only .timeline-calendar-toolbar {
+  border-top-color: rgba(148, 163, 184, 0.18);
+  border-bottom-color: rgba(148, 163, 184, 0.18);
+}
+
+body.dark-only .timeline-calendar-toolbar__title {
+  color: #f8fafc;
+}
+
+

@@ -1,0 +1,261 @@
+/*
+ * PGH-DOC
+ * File: src/Components/Compliance/Weekly/weeklyPeriodScope.scss
+ * Apa fungsi bagian ini:
+ * - File ini membangun UI/fitur utama yang dilihat user per unit kerja.
+ * Kenapa perlu:
+ * - Perlu agar pengalaman pengguna konsisten, flow antar halaman jelas, dan perubahan UI tidak memecah perilaku fitur.
+ * Aturan khususnya apa:
+ * - Gunakan komponen global tabel/filter/export yang sudah tersedia; hindari duplikasi implementasi per halaman.
+ * - Jaga konsistensi style/theme dan perilaku UX lintas unit.
+ * - Integrasi data harus mengikuti adapter serverQuery/helper global yang sudah ada.
+ */
+
+.weekly-period-scope-card {
+  width: 100%;
+  border: 1px solid rgba(241, 90, 34, 0.16);
+  border-radius: 22px;
+  background: linear-gradient(180deg, rgba(255, 248, 244, 0.96), rgba(255, 255, 255, 0.98));
+  box-shadow: 0 10px 24px rgba(36, 54, 74, 0.06);
+
+  &__body {
+    padding: 1rem 1.15rem;
+  }
+
+  &__label {
+    display: block;
+    margin-bottom: 0.45rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #6f7b8a;
+  }
+
+  &__search-input {
+    min-height: 44px;
+    border-radius: 14px;
+    border: 1px solid rgba(36, 54, 74, 0.12);
+    background: rgba(255, 255, 255, 0.9);
+    font-weight: 600;
+    color: #24364a;
+
+    &::placeholder {
+      color: #8b97a7;
+      font-weight: 500;
+    }
+
+    &:focus {
+      border-color: rgba(241, 90, 34, 0.45);
+      box-shadow: 0 0 0 0.18rem rgba(241, 90, 34, 0.16);
+    }
+  }
+
+  &__search {
+    position: relative;
+    width: min(100%, 32rem);
+
+    &.is-open {
+      z-index: 20;
+    }
+  }
+
+  &__dropdown {
+    position: absolute;
+    top: calc(100% + 0.45rem);
+    left: 0;
+    right: 0;
+    max-height: 240px;
+    overflow-y: auto;
+    border: 1px solid rgba(36, 54, 74, 0.1);
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.98);
+    box-shadow: 0 14px 30px rgba(36, 54, 74, 0.14);
+    backdrop-filter: blur(12px);
+  }
+
+  &__dropdown-option {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.8rem 0.95rem;
+    border: 0;
+    background: transparent;
+    text-align: left;
+    transition: background-color 0.18s ease, color 0.18s ease;
+
+    &:hover,
+    &.is-active {
+      background: rgba(241, 90, 34, 0.12);
+    }
+  }
+
+  &__dropdown-name {
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: #24364a;
+  }
+
+  &__dropdown-meta {
+    font-size: 0.78rem;
+    color: #6f7b8a;
+    white-space: nowrap;
+  }
+
+  &__dropdown-empty {
+    padding: 0.95rem 1rem;
+    font-size: 0.85rem;
+    color: #6f7b8a;
+  }
+
+  &__top-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 0.85rem;
+    margin-top: 0.9rem;
+  }
+
+  &__table-summary {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  &__table-name {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #24364a;
+  }
+
+  &__create {
+    border-radius: 999px;
+    padding-inline: 1rem;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  &__action-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 0.55rem;
+  }
+
+  &__create-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 0.55rem;
+  }
+
+  &__action-addon {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    min-width: 0;
+    width: 100%;
+
+    .dashboard-pill-switcher {
+      width: 100%;
+      max-width: 100%;
+      justify-content: flex-start;
+    }
+  }
+
+  &__action-secondary {
+    border-radius: 999px;
+    padding-inline: 0.95rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  &__error {
+    font-size: 0.82rem;
+    color: #b42318;
+  }
+}
+
+body.dark-only .weekly-period-scope-card {
+  border-color: rgba(255, 255, 255, 0.08);
+  background: linear-gradient(180deg, rgba(31, 41, 55, 0.92), rgba(17, 24, 39, 0.96));
+  box-shadow: 0 12px 28px rgba(4, 8, 15, 0.35);
+
+  .weekly-period-scope-card__label {
+    color: #94a3b8;
+  }
+
+  .weekly-period-scope-card__search-input {
+    border-color: #444a57;
+    background: #1e1e2d;
+    color: #e2e8f0;
+
+    &::placeholder {
+      color: #94a3b8;
+    }
+  }
+
+  .weekly-period-scope-card__dropdown {
+    border-color: #444a57;
+    background: #1e1e2d;
+    box-shadow: 0 18px 36px rgba(2, 6, 23, 0.42);
+  }
+
+  .weekly-period-scope-card__dropdown-option {
+    &:hover,
+    &.is-active {
+      background: rgba(241, 90, 34, 0.14);
+    }
+  }
+
+  .weekly-period-scope-card__dropdown-name {
+    color: #f8fafc;
+  }
+
+  .weekly-period-scope-card__dropdown-meta,
+  .weekly-period-scope-card__dropdown-empty {
+    color: #94a3b8;
+  }
+
+  .weekly-period-scope-card__table-name {
+    color: #f8fafc;
+  }
+
+  .weekly-period-scope-card__error {
+    color: #fda29b;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .weekly-period-scope-card {
+    &__action-group {
+      width: 100%;
+      justify-content: stretch;
+    }
+
+    &__create-group {
+      width: 100%;
+      justify-content: stretch;
+    }
+
+    &__action-addon {
+      width: 100%;
+      justify-content: flex-start;
+
+      .dashboard-pill-switcher {
+        width: 100%;
+        justify-content: flex-start;
+      }
+    }
+
+    &__action-secondary,
+    &__create,
+    &__create-group > * {
+      width: 100%;
+    }
+  }
+}

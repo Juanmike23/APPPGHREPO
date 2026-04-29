@@ -1,0 +1,38 @@
+/*
+ * PGH-DOC
+ * File: src/assets/scss/theme/_calendar.scss
+ * Apa fungsi bagian ini:
+ * - File ini mengatur style/theme visual agar tampilan konsisten.
+ * Kenapa perlu:
+ * - Perlu agar pengalaman pengguna konsisten, flow antar halaman jelas, dan perubahan UI tidak memecah perilaku fitur.
+ * Aturan khususnya apa:
+ * - Gunakan komponen global tabel/filter/export yang sudah tersedia; hindari duplikasi implementasi per halaman.
+ * - Jaga konsistensi style/theme dan perilaku UX lintas unit.
+ * - Integrasi data harus mengikuti adapter serverQuery/helper global yang sudah ada.
+ */
+
+/**=====================
+  12. Calendar CSS Start
+==========================**/
+@use "../utils/variables" as *;
+
+// calender
+.rbc-calendar {
+  height: 1000px !important;
+}
+#external-events {
+  position: absolute;
+  z-index: 2;
+  padding: 10px;
+  border: 1px solid #ccc;
+  background: $transparent-color;
+  overflow-y: auto;
+  width: 90%;
+}
+#external-events .fc-event {
+  margin: 1em 0;
+  cursor: move;
+}
+/**=====================
+  12. Calendar CSS End
+==========================**/

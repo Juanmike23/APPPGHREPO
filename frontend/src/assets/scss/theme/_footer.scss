@@ -1,0 +1,90 @@
+/*
+ * PGH-DOC
+ * File: src/assets/scss/theme/_footer.scss
+ * Apa fungsi bagian ini:
+ * - File ini mengatur style/theme visual agar tampilan konsisten.
+ * Kenapa perlu:
+ * - Perlu agar pengalaman pengguna konsisten, flow antar halaman jelas, dan perubahan UI tidak memecah perilaku fitur.
+ * Aturan khususnya apa:
+ * - Gunakan komponen global tabel/filter/export yang sudah tersedia; hindari duplikasi implementasi per halaman.
+ * - Jaga konsistensi style/theme dan perilaku UX lintas unit.
+ * - Integrasi data harus mengikuti adapter serverQuery/helper global yang sudah ada.
+ */
+
+/**=====================
+  31. Footer CSS Start
+==========================**/
+@use "../utils/variables" as *;
+
+.page-main-footer {
+  background-color: $footer_bg_color;
+  padding: 15px 0;
+  margin: 0 !important;
+  width: 100% !important;
+  min-width: 100% !important;
+  max-width: 100% !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  transform: none !important;
+  border-radius: 0 !important;
+  box-sizing: border-box;
+  transition: $sidebar-transition;
+
+  a {
+    font-weight: 600;
+  }
+
+  p {
+    font-size: 14px;
+    font-weight: 500;
+    color: $light-text;
+  }
+
+  &.footer-dark {
+    background-color: $footer_dark_color;
+
+    p {
+      color: $white !important;
+    }
+
+    li {
+      a {
+        color: $footer_dark__txt_color;
+      }
+    }
+  }
+}
+
+body.dark-only {
+  .page-main-footer {
+    background-color: rgba(12, 17, 29, 0.98);
+    border-top: 1px solid rgba(241, 90, 34, 0.2);
+    box-shadow: 0 -12px 28px rgba(0, 0, 0, 0.28);
+
+    p {
+      color: #f0ddd3 !important;
+    }
+
+    a {
+      color: #ffd7c7;
+    }
+
+    .font-secondary {
+      color: #f15a22 !important;
+    }
+  }
+}
+
+@media (max-width: 1199px) {
+  .page-main-footer {
+    .container-fluid {
+      padding-left: 1rem !important;
+      padding-right: 1rem !important;
+    }
+  }
+}
+/**=====================
+  31. Footer CSS Ends
+==========================**/

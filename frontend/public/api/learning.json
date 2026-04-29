@@ -1,0 +1,68 @@
+[
+    {
+        "Id": 1,
+        "img": "faq/3.jpg",
+        "date": "15 April 2022",
+        "writer": "Admin",
+        "hits": "0",
+        "short_description": [
+            "A Web Designing course belongs to the field of Computer Science and IT. It students to learn various techniques."
+        ],
+        "title": "Web Design"
+    },
+    {
+        "Id": 2,
+        "img": "faq/2.jpg",
+        "date": "15 April 2022",
+        "writer": "Admin",
+        "hits": "0",
+        "short_description": [
+            "This course is designed to start you on a path toward future studies in web development and design."
+        ],
+        "title": "Web Development"
+    },
+    {
+        "Id": 3,
+        "img": "faq/2.jpg",
+        "date": "15 April 2022",
+        "writer": "Admin",
+        "hits": "0",
+        "short_description": [
+            "User interface design (UI) is the design for machines and software, such as mobile devices, computers."
+        ],
+        "title": "UI Design"
+    },
+    {
+        "Id": 4,
+        "img": "faq/1.jpg",
+        "date": "15 April 2022",
+        "writer": "Admin",
+        "hits": "0",
+        "short_description": [
+            "A Web Designing course belongs to the field of Computer Science and IT. It students to learn various techniques."
+        ],
+        "title": "Tailwind Design"
+    },
+    {
+        "Id": 5,
+        "img": "faq/3.jpg",
+        "date": "15 April 2022",
+        "writer": "Admin",
+        "hits": "0",
+        "short_description": [
+            "User Experience design (UX) is the design for machines and software, such as mobile devices, computers."
+        ],
+        "title": "UX Design"
+    },
+    {
+        "Id": 6,
+        "img": "faq/2.jpg",
+        "date": "15 April 2022",
+        "writer": "Admin",
+        "hits": "0",
+        "short_description": [
+            "This course is designed to start you on a path toward future studies in web development and design."
+        ],
+        "title": "Php Developer"
+    }
+]

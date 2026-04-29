@@ -1,0 +1,53 @@
+/*
+ * PGH-DOC
+ * File: src/Components/Human/Resource/humanResourceList.scss
+ * Apa fungsi bagian ini:
+ * - File ini membangun UI/fitur utama yang dilihat user per unit kerja.
+ * Kenapa perlu:
+ * - Perlu agar pengalaman pengguna konsisten, flow antar halaman jelas, dan perubahan UI tidak memecah perilaku fitur.
+ * Aturan khususnya apa:
+ * - Gunakan komponen global tabel/filter/export yang sudah tersedia; hindari duplikasi implementasi per halaman.
+ * - Jaga konsistensi style/theme dan perilaku UX lintas unit.
+ * - Integrasi data harus mengikuti adapter serverQuery/helper global yang sudah ada.
+ */
+
+.human-resource-page {
+  --human-resource-bg: transparent;
+  --human-resource-border: rgba(241, 90, 34, 0.14);
+  --human-resource-shadow: 0 10px 24px rgba(36, 54, 74, 0.06);
+  --human-resource-muted: #6f7b8a;
+  --human-resource-accent: #f15a22;
+  --human-resource-highlight: #fff0e9;
+
+  min-height: calc(100vh - 120px);
+  padding-bottom: 2rem;
+  background: var(--human-resource-bg);
+
+  .human-resource-shell {
+    --bs-gutter-x: 0.82rem;
+    --bs-gutter-y: 0.82rem;
+  }
+
+  .human-resource-content {
+    width: 100%;
+  }
+
+}
+
+@media (max-width: 767.98px) {
+  .human-resource-page {
+    .project-list .border-tab .nav-item {
+      flex: 1 1 0;
+      min-width: 0;
+    }
+
+    .project-list .border-tab .nav-link {
+      width: 100%;
+      min-width: 0;
+      justify-content: center;
+      padding: 0.56rem 0.72rem;
+      font-size: 0.86rem;
+    }
+
+  }
+}

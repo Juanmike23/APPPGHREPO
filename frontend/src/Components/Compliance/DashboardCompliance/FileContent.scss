@@ -1,0 +1,72 @@
+/*
+ * PGH-DOC
+ * File: src/Components/Compliance/DashboardCompliance/FileContent.scss
+ * Apa fungsi bagian ini:
+ * - File ini membangun UI/fitur utama yang dilihat user per unit kerja.
+ * Kenapa perlu:
+ * - Perlu agar pengalaman pengguna konsisten, flow antar halaman jelas, dan perubahan UI tidak memecah perilaku fitur.
+ * Aturan khususnya apa:
+ * - Gunakan komponen global tabel/filter/export yang sudah tersedia; hindari duplikasi implementasi per halaman.
+ * - Jaga konsistensi style/theme dan perilaku UX lintas unit.
+ * - Integrasi data harus mengikuti adapter serverQuery/helper global yang sudah ada.
+ */
+
+// .file-box,
+// .folder-box {
+//   border: 1px solid #dee2e6;
+//   border-radius: 8px;
+//   margin: 10px;
+//   width: 200px;
+//   background: #fff;
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: space-between;
+//   transition: all 0.2s ease-in-out;
+
+//   &:hover {
+//     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+//     transform: translateY(-2px);
+//   }
+// }
+
+// .file-top {
+//   padding: 8px;
+//   background: #f8f9fa;
+//   border-bottom: 1px solid #dee2e6;
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+
+//   i {
+//     font-size: 18px;
+//   }
+// }
+
+// .file-bottom {
+//   padding: 12px;
+
+//   h6 {
+//     font-weight: 600;
+//     margin-bottom: 4px;
+//   }
+
+//   p {
+//     margin: 0;
+//     font-size: 12px;
+//     color: #6c757d;
+//   }
+// }
+
+// .folder-box {
+//   align-items: center;
+//   padding: 16px;
+
+//   i {
+//     font-size: 28px;
+//     margin-right: 12px;
+//   }
+
+//   h6 {
+//     margin: 0;
+//   }
+// }

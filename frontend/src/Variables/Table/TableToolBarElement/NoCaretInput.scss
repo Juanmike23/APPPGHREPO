@@ -1,0 +1,161 @@
+/*
+ * PGH-DOC
+ * File: src/Variables/Table/TableToolBarElement/NoCaretInput.scss
+ * Apa fungsi bagian ini:
+ * - File ini menyediakan komponen utilitas global (table/chart/filter/cell).
+ * Kenapa perlu:
+ * - Perlu agar pengalaman pengguna konsisten, flow antar halaman jelas, dan perubahan UI tidak memecah perilaku fitur.
+ * Aturan khususnya apa:
+ * - Gunakan komponen global tabel/filter/export yang sudah tersedia; hindari duplikasi implementasi per halaman.
+ * - Jaga konsistensi style/theme dan perilaku UX lintas unit.
+ * - Integrasi data harus mengikuti adapter serverQuery/helper global yang sudah ada.
+ */
+
+.no-caret {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: none !important;
+  padding-right: 0.75rem; /* tighten spacing */
+}
+
+//filter modal scss
+
+.filter-segment {
+  border: 1px solid #dfe3e890;
+  border-radius: 8px;
+  padding: 12px 14px;
+  background-color: #f5f7fb;
+
+  /* 👇 THIS controls vertical gap between segments */
+  margin-bottom: 16px;
+}
+
+/* Remove gap after last segment */
+.filter-segment:last-child {
+  margin-bottom: 0;
+}
+
+.filter-segment.segmented {
+  position: relative;
+  border: 1px solid #dfe3e8;
+  border-radius: 8px;
+  padding: 20px 14px 14px;
+  background-color: #f5f7fb;
+}
+
+/* TITLE CUTS THE BORDER */
+.segment-border-title {
+  position: absolute;
+  top: 0;
+  left: 16px;
+  transform: translateY(-50%);
+  padding: 4px 12px;
+  background: #ffffff;
+
+  border: 2px solid #dfe3e8;
+  border-radius: 999px; // pill shape
+  font-weight: 600;
+  font-size: 12px;
+  color: #6f7880;
+  line-height: 1;
+}
+
+/* Optional hover */
+.filter-segment.segmented:hover {
+  background-color: rgba(241, 90, 34, 0.08);
+}
+
+.segment-border-right {
+  left: auto; // cancel left positioning
+  right: 16px; // stick to right edge of segment
+  transform: translateY(-50%);
+}
+
+.segmented--expand.is-closed {
+  /* kill the box */
+  border: none !important;
+  background: transparent !important;
+
+  /* collapse spacing */
+  padding: 0 !important;
+  margin-bottom: 48px;
+
+  /* optional: prevent hover highlight */
+  &:hover {
+    background: transparent;
+  }
+}
+
+
+.pill-toggle {
+  cursor: pointer;
+  background: #f8f9fa;
+  border: 2px solid #dfe3e8;
+  border-radius: 999px; // pill shape
+  padding: 4px 12px;
+  font-size: 12px;
+  color: #495057;
+  transition: all 0.15s ease;
+}
+
+.pill-toggle:hover {
+  background: rgba(241, 90, 34, 0.12);
+  border-color: rgba(241, 90, 34, 0.45);
+  color: #a83f15;
+}
+
+body.dark-only {
+  .table-utility-modal {
+    .filter-segment {
+      border-color: #444a57;
+      background-color: #1e1e2d;
+    }
+
+    .filter-segment.segmented {
+      border-color: #444a57;
+      background-color: #1e1e2d;
+    }
+
+    .filter-segment.segmented:hover {
+      background-color: #2c2c3b;
+    }
+
+    .segment-border-title {
+      background: #2c2c3b;
+      border-color: #444a57;
+      color: #f8fafc;
+    }
+
+    .pill-toggle {
+      background: #2c2c3b;
+      border-color: #444a57;
+      color: #f8fafc;
+    }
+
+    .pill-toggle:hover {
+      background: rgba(241, 90, 34, 0.14);
+      color: #f8fafc;
+      border-color: rgba(241, 90, 34, 0.45);
+    }
+
+    .form-control,
+    .form-select,
+    .no-caret {
+      background: #1e1e2d;
+      border-color: #444a57;
+      color: #f5f5f5;
+    }
+
+    .form-control:focus,
+    .form-select:focus,
+    .no-caret:focus {
+      border-color: rgba(241, 90, 34, 0.55);
+      box-shadow: 0 0 0 0.18rem rgba(241, 90, 34, 0.2);
+    }
+
+    .filter-dropdown {
+      scrollbar-color: #64748b #2c3442;
+    }
+  }
+}

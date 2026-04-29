@@ -1,0 +1,146 @@
+/*
+ * PGH-DOC
+ * File: src/Components/Compliance/DashboardCompliance/complianceDashboard.scss
+ * Apa fungsi bagian ini:
+ * - File ini membangun UI/fitur utama yang dilihat user per unit kerja.
+ * Kenapa perlu:
+ * - Perlu agar pengalaman pengguna konsisten, flow antar halaman jelas, dan perubahan UI tidak memecah perilaku fitur.
+ * Aturan khususnya apa:
+ * - Gunakan komponen global tabel/filter/export yang sudah tersedia; hindari duplikasi implementasi per halaman.
+ * - Jaga konsistensi style/theme dan perilaku UX lintas unit.
+ * - Integrasi data harus mengikuti adapter serverQuery/helper global yang sudah ada.
+ */
+
+.compliance-dashboard-page {
+  --compliance-dashboard-border: rgba(241, 90, 34, 0.14);
+  --compliance-dashboard-shadow: 0 10px 24px rgba(36, 54, 74, 0.06);
+  --compliance-dashboard-text: #24364a;
+  --compliance-dashboard-muted: #6f7b8a;
+  --compliance-dashboard-accent: #f15a22;
+  --compliance-dashboard-highlight: #fff0e9;
+
+  min-height: calc(100vh - 120px);
+  padding-bottom: 2rem;
+
+  .compliance-dashboard-shell,
+  .compliance-dashboard-row {
+    --bs-gutter-x: 0.82rem;
+    --bs-gutter-y: 0.82rem;
+  }
+
+  .compliance-dashboard-shell {
+    max-width: 1480px;
+    margin-inline: auto;
+  }
+
+  .compliance-dashboard-col {
+    display: flex;
+    min-width: 0;
+  }
+
+  .compliance-dashboard-card {
+    width: 100%;
+    border: 1px solid var(--compliance-dashboard-border);
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.96);
+    box-shadow: var(--compliance-dashboard-shadow);
+    overflow: hidden;
+  }
+
+  .compliance-dashboard-card--chart {
+    min-height: 365px;
+    overflow: visible;
+  }
+
+  .compliance-dashboard-row > .compliance-dashboard-col > .compliance-dashboard-card {
+    width: 100%;
+    max-width: 656px;
+    margin-inline: auto;
+  }
+
+  .compliance-dashboard-card .card-body {
+    padding: 1.25rem 1.15rem;
+  }
+
+  .compliance-dashboard-card--chart .card-body,
+  .compliance-dashboard-card--chart .apexcharts-canvas,
+  .compliance-dashboard-card--chart .apexcharts-inner,
+  .compliance-dashboard-card--chart .apexcharts-svg {
+    overflow: visible !important;
+  }
+
+  .compliance-dashboard-mini-card-body {
+    min-height: 100%;
+    padding: 0.6rem !important;
+  }
+
+  .compliance-dashboard-mini-card-body--pie {
+    justify-content: flex-start !important;
+    align-items: stretch !important;
+    padding: 0 !important;
+  }
+
+  .compliance-dashboard-clickable-tile {
+    min-width: 0;
+    min-height: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: stretch;
+    padding: 1.45rem 1.5rem 1.3rem;
+    border-radius: 20px;
+    background: transparent;
+    transition: none;
+    overflow: visible;
+  }
+
+  .compliance-dashboard-clickable-tile > * {
+    width: 100%;
+    min-width: 0;
+  }
+}
+
+body.dark-only .compliance-dashboard-page {
+  --compliance-dashboard-border: rgba(255, 255, 255, 0.08);
+  --compliance-dashboard-shadow: 0 12px 28px rgba(4, 8, 15, 0.35);
+  --compliance-dashboard-text: #e5e7eb;
+  --compliance-dashboard-muted: #94a3b8;
+  --compliance-dashboard-highlight: rgba(241, 90, 34, 0.24);
+}
+
+@media (max-width: 767.98px) {
+  .compliance-dashboard-page {
+    .compliance-dashboard-card {
+      border-radius: 20px;
+    }
+
+    .compliance-dashboard-card .card-body {
+      padding: 0.95rem 0.9rem;
+    }
+
+    .compliance-dashboard-card--chart {
+      min-height: 320px;
+    }
+
+    .compliance-dashboard-clickable-tile {
+      padding: 1rem 0.95rem 0.95rem;
+    }
+  }
+}
+
+@media (max-width: 575.98px) {
+  .compliance-dashboard-page {
+    .compliance-dashboard-shell,
+    .compliance-dashboard-row {
+      --bs-gutter-x: 0.62rem;
+      --bs-gutter-y: 0.62rem;
+    }
+
+    .compliance-dashboard-card .card-body {
+      padding: 0.82rem 0.74rem;
+    }
+
+    .compliance-dashboard-card--chart {
+      min-height: 290px;
+    }
+  }
+}

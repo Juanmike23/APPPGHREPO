@@ -1,0 +1,561 @@
+/*
+ * PGH-DOC
+ * File: src/Components/Audit/DashboardAudit/auditDashboard.scss
+ * Apa fungsi bagian ini:
+ * - File ini membangun UI/fitur utama yang dilihat user per unit kerja.
+ * Kenapa perlu:
+ * - Perlu agar pengalaman pengguna konsisten, flow antar halaman jelas, dan perubahan UI tidak memecah perilaku fitur.
+ * Aturan khususnya apa:
+ * - Gunakan komponen global tabel/filter/export yang sudah tersedia; hindari duplikasi implementasi per halaman.
+ * - Jaga konsistensi style/theme dan perilaku UX lintas unit.
+ * - Integrasi data harus mengikuti adapter serverQuery/helper global yang sudah ada.
+ */
+
+.audit-dashboard-page {
+  --audit-dashboard-bg: linear-gradient(180deg, #fff9f4 0%, #ffffff 22%, #fffdfb 100%);
+  --audit-dashboard-card: rgba(255, 255, 255, 0.96);
+  --audit-dashboard-border: rgba(241, 90, 34, 0.12);
+  --audit-dashboard-shadow: 0 18px 42px rgba(36, 54, 74, 0.08);
+  --audit-dashboard-shadow-soft: 0 10px 24px rgba(36, 54, 74, 0.06);
+  --audit-dashboard-text: #24364a;
+  --audit-dashboard-muted: #6f7b8a;
+  --audit-dashboard-accent: #f15a22;
+  --audit-dashboard-accent-soft: rgba(241, 90, 34, 0.08);
+  --audit-dashboard-highlight: #fff0e9;
+
+  min-height: calc(100vh - 120px);
+  padding-bottom: 2rem;
+
+  .audit-dashboard-shell,
+  .audit-dashboard-row {
+    --bs-gutter-x: 0.82rem;
+    --bs-gutter-y: 0.82rem;
+  }
+
+  .audit-dashboard-shell {
+    max-width: 1480px;
+    margin-inline: auto;
+  }
+
+  .audit-dashboard-col {
+    display: flex;
+    min-width: 0;
+  }
+
+  .project-list > .card {
+    margin-bottom: 0.25rem;
+    border: 1px solid var(--audit-dashboard-border);
+    border-radius: 24px;
+    box-shadow: var(--audit-dashboard-shadow-soft);
+    background: linear-gradient(180deg, rgba(255, 247, 240, 0.92), rgba(255, 255, 255, 0.98));
+    overflow: hidden;
+  }
+
+  .project-list .header-row {
+    gap: 0.85rem;
+    padding: 1rem 1.35rem;
+    justify-content: center;
+  }
+
+  .project-list .left-side {
+    min-width: 0;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .project-list .border-tab {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    border-bottom: 0;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .project-list .border-tab .nav-item {
+    margin-bottom: 0;
+  }
+
+  .project-list .border-tab .nav-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.42rem;
+    min-width: clamp(9.4rem, 13vw, 12.8rem);
+    border: 0;
+    border-radius: 999px;
+    padding: 0.62rem 1rem;
+    font-weight: 600;
+    color: var(--audit-dashboard-muted);
+    background: transparent;
+    transition:
+      background-color 180ms ease,
+      color 180ms ease,
+      transform 180ms ease,
+      box-shadow 180ms ease;
+  }
+
+  .project-list .border-tab .nav-link .audit-dashboard-tab-text {
+    white-space: nowrap;
+  }
+
+  .project-list .border-tab .nav-link.active,
+  .project-list .border-tab .nav-link:hover {
+    background: var(--audit-dashboard-highlight);
+    color: var(--audit-dashboard-accent);
+    box-shadow: inset 0 0 0 1px rgba(241, 90, 34, 0.12);
+    transform: translateY(-1px);
+  }
+
+  .audit-dashboard-card,
+  .audit-dashboard-page .income-card {
+    width: 100%;
+    border: 1px solid var(--audit-dashboard-border);
+    border-radius: 24px;
+    background: var(--audit-dashboard-card);
+    box-shadow: var(--audit-dashboard-shadow-soft);
+    overflow: hidden;
+  }
+
+  .audit-dashboard-card {
+    min-height: 100%;
+  }
+
+  .audit-dashboard-card--metric {
+    min-height: var(--audit-page-top-card-height);
+  }
+
+  .audit-dashboard-card--mini-chart,
+  .audit-dashboard-card--cluster,
+  .audit-dashboard-card--detail {
+    min-height: calc(var(--audit-page-top-card-height) + 35px);
+  }
+
+  .audit-dashboard-card--mini-chart {
+    overflow: hidden;
+  }
+
+  .audit-dashboard-card--detail {
+    min-height: 250px;
+  }
+
+  .audit-dashboard-card--chart {
+    min-height: 365px;
+  }
+
+  .audit-dashboard-card--timeline {
+    min-height: 420px;
+  }
+
+  .audit-dashboard-row > .audit-dashboard-col.col-xl-6 > .card-dashboard-wrapper,
+  .audit-dashboard-row > .audit-dashboard-col.col-lg-6 > .card-dashboard-wrapper,
+  .audit-dashboard-row > .audit-dashboard-col.col-md-6 > .card-dashboard-wrapper,
+  .audit-dashboard-row > .audit-dashboard-col.col-xl-6 > .audit-dashboard-card,
+  .audit-dashboard-row > .audit-dashboard-col.col-lg-6 > .audit-dashboard-card,
+  .audit-dashboard-row > .audit-dashboard-col.col-md-6 > .audit-dashboard-card,
+  .audit-dashboard-row > .audit-dashboard-col.col-xl-6 > .income-card,
+  .audit-dashboard-row > .audit-dashboard-col.col-lg-6 > .income-card,
+  .audit-dashboard-row > .audit-dashboard-col.col-md-6 > .income-card {
+    width: 100%;
+    max-width: 656px;
+    margin-inline: auto;
+  }
+
+  .audit-dashboard-card--section {
+    min-height: auto;
+    background: linear-gradient(180deg, #fff6ef, #fffdfb);
+  }
+
+  .audit-dashboard-card--compare-guide {
+    min-height: auto;
+    background: linear-gradient(180deg, #fff5ec 0%, #fffdfb 100%);
+  }
+
+  .audit-dashboard-section-title {
+    letter-spacing: 0.01em;
+    font-size: 0.98rem;
+  }
+
+  .audit-dashboard-card .card-body,
+  .audit-dashboard-page .income-card .card-body {
+    padding: 1.25rem 1.15rem;
+  }
+
+  .audit-dashboard-mini-card-body {
+    min-height: 100%;
+    padding: 0.6rem !important;
+  }
+
+  .audit-dashboard-mini-card-body--pie {
+    justify-content: flex-start !important;
+    align-items: stretch !important;
+    padding: 0 !important;
+  }
+
+  .audit-dashboard-compare-guide-body {
+    padding: 1rem 1.2rem !important;
+  }
+
+  .audit-dashboard-compare-guide {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.9rem;
+    align-items: stretch;
+  }
+
+  .audit-dashboard-compare-guide__item {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    padding: 0.95rem 1rem;
+    border-radius: 18px;
+    border: 1px solid rgba(241, 90, 34, 0.12);
+    background: rgba(255, 255, 255, 0.82);
+  }
+
+  .audit-dashboard-compare-guide__eyebrow {
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--audit-dashboard-accent);
+  }
+
+  .audit-dashboard-compare-guide__title-wrap {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    min-width: 0;
+  }
+
+  .audit-dashboard-compare-guide__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.4rem;
+    height: 2.4rem;
+    border-radius: 14px;
+    color: var(--audit-dashboard-accent);
+    background: rgba(241, 90, 34, 0.1);
+  }
+
+  .audit-dashboard-compare-guide__title {
+    font-size: 1.02rem;
+    font-weight: 700;
+    color: var(--audit-dashboard-text);
+  }
+
+  .audit-dashboard-compare-guide__description,
+  .audit-dashboard-compare-timeline-note {
+    font-size: 0.88rem;
+    line-height: 1.5;
+    color: var(--audit-dashboard-muted);
+  }
+
+  .audit-dashboard-page .income-card .round-box {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 54px;
+    height: 54px;
+    margin-bottom: 0.9rem;
+    border-radius: 18px;
+    color: var(--audit-dashboard-accent);
+    background: rgba(241, 90, 34, 0.1);
+    box-shadow: inset 0 0 0 1px rgba(241, 90, 34, 0.08);
+  }
+
+  .audit-dashboard-page .income-card p,
+  .audit-dashboard-page .income-card h5,
+  .audit-dashboard-page .card h5,
+  .audit-dashboard-page .card h6 {
+    color: var(--audit-dashboard-text);
+  }
+
+  .audit-dashboard-page .income-card .btn-arrow {
+    margin-top: 0.85rem;
+  }
+
+  .audit-dashboard-card--mini-chart .audit-dashboard-clickable-tile {
+    min-height: 100%;
+    padding: 0.2rem 0.1rem;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .audit-dashboard-mini-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(165px, 1fr));
+    gap: 0.9rem;
+    align-items: stretch;
+  }
+
+  .audit-dashboard-clickable-tile {
+    min-width: 0;
+    min-height: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: stretch;
+    padding: 1.45rem 1.5rem 1.3rem;
+    border-radius: 20px;
+    background: transparent;
+    transition: none;
+  }
+
+  .audit-dashboard-card--mini-chart .audit-dashboard-clickable-tile:hover {
+    background: transparent;
+    box-shadow: none;
+    transform: none;
+  }
+
+  .audit-dashboard-clickable-tile > * {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .audit-dashboard-placeholder {
+    width: min(100%, 220px);
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin-top: 0.6rem;
+  }
+
+  .audit-dashboard-placeholder--metric {
+    align-items: center;
+  }
+
+  .audit-dashboard-placeholder--chart {
+    width: 100%;
+    max-width: 100%;
+    margin-top: 2rem;
+  }
+
+  .audit-dashboard-placeholder__line {
+    display: block;
+    width: 100%;
+    height: 12px;
+    border-radius: 999px;
+    background: linear-gradient(
+      90deg,
+      rgba(241, 90, 34, 0.08),
+      rgba(241, 90, 34, 0.18),
+      rgba(241, 90, 34, 0.08)
+    );
+    background-size: 220% 100%;
+    animation: auditDashboardPulse 1.8s ease-in-out infinite;
+  }
+
+  .audit-dashboard-placeholder__line--strong {
+    width: 72%;
+    height: 16px;
+  }
+
+  .audit-dashboard-placeholder__line--short {
+    width: 58%;
+  }
+
+  .audit-dashboard-card .feedback-state {
+    min-height: 220px;
+    margin-top: 1rem;
+    border-radius: 18px;
+    background: rgba(255, 250, 246, 0.78);
+    border: 1px solid rgba(241, 90, 34, 0.08);
+  }
+
+  .audit-dashboard-card .feedback-state--compact {
+    min-height: 190px;
+  }
+
+  .audit-dashboard-appear {
+    animation: auditDashboardCardIn 420ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  }
+
+  .audit-dashboard-timeline-focus .audit-dashboard-card--timeline {
+    box-shadow:
+      0 0 0 2px rgba(241, 90, 34, 0.28),
+      0 16px 34px rgba(36, 54, 74, 0.12);
+    transform: translateY(-2px);
+    transition: box-shadow 220ms ease, transform 220ms ease;
+  }
+}
+
+body.dark-only {
+  .audit-dashboard-page {
+    .project-list > .card,
+    .audit-dashboard-card,
+    .audit-dashboard-page .income-card {
+      background: rgba(17, 23, 39, 0.94);
+      border-color: rgba(241, 90, 34, 0.18);
+      box-shadow: 0 18px 42px rgba(0, 0, 0, 0.34);
+    }
+
+    .audit-dashboard-compare-guide__item {
+      background: rgba(21, 29, 42, 0.82);
+      border-color: rgba(241, 90, 34, 0.18);
+    }
+
+    .project-list .border-tab .nav-link {
+      color: #c8d0dc;
+    }
+
+    .project-list .border-tab .nav-link.active,
+    .project-list .border-tab .nav-link:hover {
+      background: rgba(241, 90, 34, 0.16);
+      color: #ffbf88;
+      box-shadow: inset 0 0 0 1px rgba(241, 90, 34, 0.16);
+    }
+
+    .audit-dashboard-page .income-card p,
+    .audit-dashboard-page .income-card h5,
+    .audit-dashboard-page .card h5,
+    .audit-dashboard-page .card h6 {
+      color: #eef2f8;
+    }
+
+    .audit-dashboard-page .income-card .round-box {
+      color: #ffb36f;
+      background: rgba(241, 90, 34, 0.16);
+      box-shadow: inset 0 0 0 1px rgba(255, 179, 111, 0.14);
+    }
+
+    .audit-dashboard-clickable-tile {
+      background: transparent;
+    }
+
+    .audit-dashboard-card--mini-chart .audit-dashboard-clickable-tile,
+    .audit-dashboard-card--mini-chart .audit-dashboard-clickable-tile:hover {
+      background: transparent;
+      box-shadow: none;
+    }
+
+    .audit-dashboard-card .feedback-state {
+      background: rgba(21, 29, 42, 0.78);
+      border-color: rgba(241, 90, 34, 0.14);
+    }
+  }
+}
+
+@keyframes auditDashboardCardIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes auditDashboardPulse {
+  0%,
+  100% {
+    background-position: 0% 50%;
+    opacity: 0.75;
+  }
+
+  50% {
+    background-position: 100% 50%;
+    opacity: 1;
+  }
+}
+
+@media (max-width: 1199px) {
+  .audit-dashboard-page {
+    .audit-dashboard-card--chart {
+      min-height: 345px;
+    }
+
+    .audit-dashboard-card--timeline {
+      min-height: 380px;
+    }
+  }
+}
+
+@media (max-width: 767.98px) {
+  .audit-dashboard-page {
+    .project-list .border-tab {
+      width: 100%;
+      gap: 0.45rem;
+    }
+
+    .project-list .border-tab .nav-item {
+      flex: 1 1 0;
+      min-width: 0;
+    }
+
+    .project-list .border-tab .nav-link {
+      width: 100%;
+      min-width: 0;
+      justify-content: center;
+      padding: 0.56rem 0.72rem;
+      font-size: 0.86rem;
+    }
+
+    .project-list .header-row .left-side {
+      width: 100%;
+      flex: 1 1 100%;
+    }
+
+    .project-list .header-row {
+      padding: 0.9rem 1rem;
+    }
+
+    .audit-dashboard-compare-guide {
+      grid-template-columns: 1fr;
+    }
+
+    .audit-dashboard-mini-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .audit-dashboard-card,
+    .audit-dashboard-page .income-card {
+      border-radius: 20px;
+    }
+
+    .audit-dashboard-card--metric,
+    .audit-dashboard-card--mini-chart,
+    .audit-dashboard-card--cluster,
+    .audit-dashboard-card--detail {
+      min-height: 200px;
+    }
+
+    .audit-dashboard-card--chart {
+      min-height: 320px;
+    }
+  }
+}
+
+@media (max-width: 575.98px) {
+  .audit-dashboard-page {
+    .audit-dashboard-shell,
+    .audit-dashboard-row {
+      --bs-gutter-x: 0.62rem;
+      --bs-gutter-y: 0.62rem;
+    }
+
+    .project-list > .card,
+    .audit-dashboard-card,
+    .audit-dashboard-page .income-card {
+      border-radius: 18px;
+    }
+
+    .audit-dashboard-card .card-body,
+    .audit-dashboard-page .income-card .card-body {
+      padding: 0.86rem 0.76rem;
+    }
+
+    .audit-dashboard-card--chart {
+      min-height: 290px;
+    }
+
+    .audit-dashboard-card--timeline {
+      min-height: 320px;
+    }
+  }
+}

@@ -1,0 +1,120 @@
+/*
+ * PGH-DOC
+ * File: src/Variables/Chart/_chartColors.scss
+ * Apa fungsi bagian ini:
+ * - File ini menyediakan komponen utilitas global (table/chart/filter/cell).
+ * Kenapa perlu:
+ * - Perlu agar pengalaman pengguna konsisten, flow antar halaman jelas, dan perubahan UI tidak memecah perilaku fitur.
+ * Aturan khususnya apa:
+ * - Gunakan komponen global tabel/filter/export yang sudah tersedia; hindari duplikasi implementasi per halaman.
+ * - Jaga konsistensi style/theme dan perilaku UX lintas unit.
+ * - Integrasi data harus mengikuti adapter serverQuery/helper global yang sudah ada.
+ */
+
+// 🎨 _chartColors.scss
+// 🎨 _chartColors.scss
+@use "sass:list";
+
+$chart-colors-main: (
+  #343a5f,
+  #eaca80,
+  #ffaf59,
+  #F15A22
+);
+
+:root {
+  --chart-top: #{list.nth($chart-colors-main, 1)};
+  --chart-mid-1: #{list.nth($chart-colors-main, 2)};
+  --chart-mid-2: #{list.nth($chart-colors-main, 3)};
+  --chart-bottom: #{list.nth($chart-colors-main, 4)};
+}
+
+$chart-colors-soft: (
+  #A0C4FF,
+  #BDB2FF,
+  #FFC6FF,
+  #FFADAD
+);
+
+$chart-colors-contrast: (
+  #1D3557,
+  #E63946,
+  #F1FAEE,
+  #457B9D,
+  #A8DADC
+);
+
+// --- Status palette ---
+$chart-status-success: #52C41A;
+$chart-status-warning: #FFC53D;
+$chart-status-danger: #FF4D4F;
+$chart-status-neutral: #B0BEC5;
+
+$chart-colors-many: (
+    #4E79A7,
+    #F28E2B,
+    #E15759,
+    #76B7B2,
+    #59A14F,
+    #EDC948,
+    #B07AA1,
+    #FF9DA7,
+    #9C755F,
+    #BAB0AC,
+    #A0CBE8,
+    #FFBE7D,
+    #FF9D9A,
+    #B2DFE0,
+    #8CD17D,
+    #F1CE63,
+    #D4A6C8,
+    #FFBDC5,
+    #D7B5A6,
+    #D7D7D7,
+    #3B5D7A,
+    #C98B4E,
+    #B6474A,
+    #5F9C98,
+    #478645,
+    #D5B74A,
+    #8E5E8A,
+    #D97A8C,
+    #7B6658,
+    #9FA4A7,
+);
+
+// --- Horizontal bar chart palette ---
+$chart-barchart-horizontal: (
+  #343A5F,
+  #FFAF59,
+  #EACA80,
+  #F15A22,
+  #6E4B2A,
+  #40513B,
+  #B6D96C,
+#4E8098 ,
+#7A3E6E,
+#DB5B78
+);
+
+:root {
+  @for $i from 1 through list.length($chart-barchart-horizontal) {
+    --chart-bar-h-#{$i}: #{list.nth($chart-barchart-horizontal, $i)};
+  }
+}
+
+
+$chart-barchart-planning-expense : (
+  #309e3f,
+  #B6D96C,
+ #ffc107,
+  #F15A22,
+  #d22d3d,
+);
+
+:root {
+  @for $i from 1 through list.length($chart-barchart-planning-expense) {
+    --chart-bar-p-#{$i}: #{list.nth($chart-barchart-planning-expense, $i)};
+  }
+}
+

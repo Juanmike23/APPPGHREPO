@@ -1,0 +1,23 @@
+/*
+ * PGH-DOC
+ * File: src/Variables/Breadcrumbs/iconcircle.scss
+ * Apa fungsi bagian ini:
+ * - File ini menyediakan komponen utilitas global (table/chart/filter/cell).
+ * Kenapa perlu:
+ * - Perlu agar pengalaman pengguna konsisten, flow antar halaman jelas, dan perubahan UI tidak memecah perilaku fitur.
+ * Aturan khususnya apa:
+ * - Gunakan komponen global tabel/filter/export yang sudah tersedia; hindari duplikasi implementasi per halaman.
+ * - Jaga konsistensi style/theme dan perilaku UX lintas unit.
+ * - Integrasi data harus mengikuti adapter serverQuery/helper global yang sudah ada.
+ */
+
+.icon-circle-primary {
+//  background: rgba($primary-color, 0.25);
+
+  width: 32px;      /* you can set 25px if you want */
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -1,0 +1,156 @@
+/*
+ * PGH-DOC
+ * File: src/assets/scss/style.scss
+ * Apa fungsi bagian ini:
+ * - File ini mengatur style/theme visual agar tampilan konsisten.
+ * Kenapa perlu:
+ * - Perlu agar pengalaman pengguna konsisten, flow antar halaman jelas, dan perubahan UI tidak memecah perilaku fitur.
+ * Aturan khususnya apa:
+ * - Gunakan komponen global tabel/filter/export yang sudah tersedia; hindari duplikasi implementasi per halaman.
+ * - Jaga konsistensi style/theme dan perilaku UX lintas unit.
+ * - Integrasi data harus mengikuti adapter serverQuery/helper global yang sudah ada.
+ */
+
+/*-----------------------------------------------------------------------------------
+    Template Name: viho Admin
+    Template URI: themes.pixelstrap.com/viho
+    Description: This is Admin theme
+    Author: Pixelstrap
+    Author URI: https://themeforest.net/user/pixelstrap
+-----------------------------------------------------------------------------------
+01. According CSS
+02. Alert CSS
+03. Avatars CSS
+04. Badge CSS
+05. Base input CSS
+06. Blog CSS
+07. Bookmark app CSS
+08. Bookmark CSS
+09. Box layout CSS
+10. Breadcrumb CSS
+11. Button CSS
+12. Calendar CSS
+13. Card CSS
+14. Cart CSS
+15. Chart CSS
+16. Chat CSS
+17. Checkout CSS
+18. Coming soon CSS
+19. Contacts CSS 
+20. Custom theme option CSS
+21. Dashboard 2 CSS
+22. Dashboard default CSS
+23. Datatable CSS
+24. Datepicker CSS
+25. Dropdown CSS
+26. Ecommerce CSS
+27. Email Application CSS
+28. Error page CSS
+29. FAQ CSS
+30. File CSS
+31. Footer CSS
+32. Form input CSS
+33. Form Widgets CSS
+34. Forms CSS
+35. Gallery CSS
+36. General CSS
+37. Generic CSS
+38. Grid CSS
+39. Header CSS
+40. Icons CSS
+41. Invoice CSS
+42. Job search CSS
+43. Kanban CSS
+44. Knowledgbase CSS
+45. Form Wizard CSS
+46. Learning CSS
+47. List CSS
+48. Loader CSS
+49. Login CSS
+50. Megaoption CSS
+51. Navs CSS
+52. Order history CSS
+53. Other Success CSS
+54. Page CSS
+55. Popover CSS
+56. Pricing CSS
+57. Print CSS
+58. Progress CSS
+59. Projectlist CSS
+60. Radio Button CSS
+61. React Plugin CSS
+62. Responsive CSS
+63. Ribbon CSS
+64. RTL CSS
+65. Search CSS
+66. Select 2 CSS
+67. Sidebar CSS
+68. Social app CSS
+69. Steps CSS
+70. SVG CSS
+71. Switch CSS
+72. Tab CSS
+73. Table CSS
+74. Task CSS
+75. Template Email CSS
+76. Template email 2 CSS
+77. Theme customizer CSS
+78. Touchspin CSS
+79. Typeahead search CSS
+80. User profile CSS
+81. Wishlist CSS
+82. Auth Login CSS
+83. TimePicker CSS
+84. Variable CSS
+85. Slick CSS
+*/
+
+@use "sass:meta";
+
+:root {
+    --theme-default: #26695c;
+    --theme-secondary: #c29873;
+}
+
+@include meta.load-css("theme/general");
+@include meta.load-css("theme/generic");
+@include meta.load-css("theme/card");
+@include meta.load-css("theme/loader");
+@include meta.load-css("theme/header");
+@include meta.load-css("theme/sidebar");
+@include meta.load-css("theme/dashboard_default");
+@include meta.load-css("theme/dashboard_2");
+@include meta.load-css("theme/alert");
+@include meta.load-css("theme/buttons");
+@include meta.load-css("theme/grid");
+@include meta.load-css("theme/errorpage");
+@include meta.load-css("theme/icons");
+@include meta.load-css("theme/popover");
+@include meta.load-css("theme/list");
+@include meta.load-css("theme/switch");
+@include meta.load-css("theme/progress");
+@include meta.load-css("theme/according");
+@include meta.load-css("theme/login");
+@include meta.load-css("theme/authLogin");
+@include meta.load-css("theme/forms");
+@include meta.load-css("theme/radio");
+@include meta.load-css("theme/form-input");
+@include meta.load-css("theme/page");
+@include meta.load-css("theme/navs");
+@include meta.load-css("theme/dropdown");
+@include meta.load-css("scrollable");
+@include meta.load-css("theme/scroll");
+@include meta.load-css("theme/chart");
+@include meta.load-css("theme/tab");
+@include meta.load-css("theme/footer");
+@include meta.load-css("theme/badge");
+@include meta.load-css("theme/search");
+@include meta.load-css("theme/breadcrumb");
+@include meta.load-css("theme/steps");
+@include meta.load-css("theme/theme-customizer");
+@include meta.load-css("vendors/sticky");
+@include meta.load-css("theme/custom-theme-options");
+@include meta.load-css("theme/pgh-responsive-global");
+
+
+

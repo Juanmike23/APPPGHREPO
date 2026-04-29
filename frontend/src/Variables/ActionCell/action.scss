@@ -1,0 +1,12 @@
+/*
+ * PGH-DOC
+ * File: src/Variables/ActionCell/action.scss
+ * Apa fungsi bagian ini:
+ * - File ini menyimpan style pendukung komponen action cell pada tabel global.
+ * Kenapa perlu:
+ * - Perlu agar tampilan aksi di setiap tabel tetap konsisten dan mudah dirawat.
+ * Aturan khususnya apa:
+ * - Ikuti pola style global yang dipakai di unit lain.
+ * - Hindari override agresif yang memecah konsistensi tema.
+ * - Perubahan naming class harus sinkron dengan komponen React yang memakainya.
+ */

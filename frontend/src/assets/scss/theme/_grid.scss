@@ -1,0 +1,61 @@
+/*
+ * PGH-DOC
+ * File: src/assets/scss/theme/_grid.scss
+ * Apa fungsi bagian ini:
+ * - File ini mengatur style/theme visual agar tampilan konsisten.
+ * Kenapa perlu:
+ * - Perlu agar pengalaman pengguna konsisten, flow antar halaman jelas, dan perubahan UI tidak memecah perilaku fitur.
+ * Aturan khususnya apa:
+ * - Gunakan komponen global tabel/filter/export yang sudah tersedia; hindari duplikasi implementasi per halaman.
+ * - Jaga konsistensi style/theme dan perilaku UX lintas unit.
+ * - Integrasi data harus mengikuti adapter serverQuery/helper global yang sudah ada.
+ */
+
+/**=====================
+  38. GRID CSS Start
+==========================**/
+@use "../utils/variables" as *;
+
+.grid-showcase {
+  margin-bottom: -10px;
+  span {
+    display: block;
+    border: 1px solid $light-gray;
+    padding: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+    background-color: rgba($primary-color, 0.1);
+    color: var(--theme-default);
+    font-weight: 600;
+  }
+}
+.grid-align {
+  margin-bottom: -30px;
+  .row {
+    padding: 15px 0;
+    min-height: 10rem;
+    border: 1px solid rgba($primary-color, 0.03);
+    margin-bottom: 30px;
+    background-color: rgba($primary-color, 0.03);
+  }
+}
+.grid-wrrapper {
+  .table-striped {
+    tbody {
+      tr {
+        &:nth-of-type(odd) {
+          --bs-table-accent-bg: unset;
+          background-color: rgba($primary-color, 0.1);
+          color: var(--theme-default);
+          th,
+          td {
+            color: var(--theme-default);
+          }
+        }
+      }
+    }
+  }
+}
+/**=====================
+  38. GRID CSS Ends
+==========================**/

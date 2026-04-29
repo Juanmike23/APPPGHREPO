@@ -1,0 +1,20 @@
+<Project>
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageVersion Include="AutoMapper" Version="16.1.1" />
+    <PackageVersion Include="BCrypt.Net-Next" Version="4.1.0" />
+    <PackageVersion Include="EPPlus" Version="8.5.1" />
+    <PackageVersion Include="ExcelDataReader" Version="3.8.0" />
+    <PackageVersion Include="ExcelDataReader.DataSet" Version="3.8.0" />
+    <PackageVersion Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="10.0.5" />
+    <PackageVersion Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="10.0.5" />
+    <PackageVersion Include="Microsoft.Data.SqlClient" Version="7.0.0" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="10.0.5" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.SqlServer" Version="10.0.5" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Tools" Version="10.0.5" />
+    <PackageVersion Include="Twilio" Version="7.14.3" />
+  </ItemGroup>
+</Project>

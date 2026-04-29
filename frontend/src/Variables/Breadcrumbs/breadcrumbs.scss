@@ -1,0 +1,97 @@
+/*
+ * PGH-DOC
+ * File: src/Variables/Breadcrumbs/breadcrumbs.scss
+ * Apa fungsi bagian ini:
+ * - File ini menyediakan komponen utilitas global (table/chart/filter/cell).
+ * Kenapa perlu:
+ * - Perlu agar pengalaman pengguna konsisten, flow antar halaman jelas, dan perubahan UI tidak memecah perilaku fitur.
+ * Aturan khususnya apa:
+ * - Gunakan komponen global tabel/filter/export yang sudah tersedia; hindari duplikasi implementasi per halaman.
+ * - Jaga konsistensi style/theme dan perilaku UX lintas unit.
+ * - Integrasi data harus mengikuti adapter serverQuery/helper global yang sudah ada.
+ */
+
+/* Wrap everything */
+.breadcrumbs-wrapper {
+  margin: 0 1rem;
+}
+
+/* ---------------------------
+   MOBILE HEADER
+--------------------------- */
+.mobile-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+
+  /* Hide on desktop */
+  @media (min-width: 768px) {
+    display: none;
+  }
+}
+
+/* Icon Circle */
+.mobile-icon-wrapper {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+//  background: rgba(#2c323f, 0.1) ; // your theme color
+
+//    svg {
+//     stroke:   #2c323f!important;
+//   }
+
+   background: rgba(#F15A22, 0.1) ; // your theme color
+
+   svg {
+    stroke:   #F15A22!important;
+  }
+}
+
+/* Mobile Title */
+.mobile-title {
+  margin: 0;
+  font-weight: 900;
+  font-size: 1.3rem;
+}
+
+
+/* ---------------------------
+   DESKTOP HEADER
+--------------------------- */
+.desktop-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+.desktop-title {
+  display: none;
+  font-weight: 900;
+
+  @media (min-width: 768px) {
+    display: block;
+  }
+}
+
+
+/* Breadcrumb styling */
+.desktop-breadcrumb {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+
+/* ---------------------------
+   DIVIDER
+--------------------------- */
+.breadcrumbs-divider {
+  margin: 8px 0;
+  border-top: 1px solid rgba(108, 117, 125, 0.5); // bootstrap secondary
+}

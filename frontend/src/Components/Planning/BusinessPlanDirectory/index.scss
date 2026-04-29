@@ -1,0 +1,404 @@
+/*
+ * PGH-DOC
+ * File: src/Components/Planning/BusinessPlanDirectory/index.scss
+ * Apa fungsi bagian ini:
+ * - Styling halaman Folder Planning agar tampil seperti file directory yang rapi.
+ * Kenapa perlu:
+ * - Perlu agar folder bertingkat, breadcrumb, dan aksi file mudah dipahami user Planning.
+ * Aturan khususnya apa:
+ * - Gunakan namespace halaman ini saja agar tidak bentrok dengan unit lain.
+ * - Ikuti tema engine table/modal agar light dan dark mode tetap konsisten.
+ */
+
+.business-plan-directory-page {
+  .business-plan-directory-card {
+    border: 1px solid var(--theme-deep-border, rgba(241, 90, 34, 0.16));
+    border-radius: 18px;
+    box-shadow: 0 16px 34px rgba(15, 23, 42, 0.06);
+    overflow: visible;
+  }
+
+  .business-plan-directory-header {
+    padding-bottom: 0.9rem;
+  }
+
+  .business-plan-directory-header__actions {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .business-plan-directory-upload-form {
+    margin: 0;
+  }
+
+  .business-plan-directory-action-btn {
+    min-width: 140px;
+    border-radius: 12px;
+    font-weight: 600;
+  }
+
+  .business-plan-directory-alert {
+    border-radius: 12px;
+    margin-bottom: 1rem;
+  }
+
+  .business-plan-directory-search-scope {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #4b5563;
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+
+  .business-plan-directory-breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.35rem;
+    margin-bottom: 0.45rem;
+  }
+
+  .business-plan-directory-breadcrumb__item {
+    border: none;
+    background: transparent;
+    color: #4b5563;
+    font-size: 0.95rem;
+    font-weight: 600;
+    padding: 0;
+    line-height: 1.4;
+
+    &:not(:disabled):hover {
+      color: #f15a22;
+    }
+
+    &.is-active {
+      color: #111827;
+      cursor: default;
+    }
+
+    &:disabled {
+      opacity: 1;
+    }
+  }
+
+  .business-plan-directory-breadcrumb__separator {
+    color: #9ca3af;
+    flex: 0 0 auto;
+  }
+
+  .business-plan-directory-subtitle {
+    color: #6b7280;
+    font-size: 0.92rem;
+    margin-bottom: 1rem;
+  }
+
+  .business-plan-directory-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 14px;
+  }
+
+  .business-plan-directory-item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    min-height: 208px;
+    padding: 1rem;
+    border: 1px solid rgba(148, 163, 184, 0.24);
+    border-radius: 16px;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 250, 252, 0.98) 100%);
+    box-shadow: 0 10px 24px rgba(15, 23, 42, 0.04);
+    transition: transform 0.16s ease, box-shadow 0.16s ease, border-color 0.16s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+      border-color: rgba(241, 90, 34, 0.3);
+      box-shadow: 0 16px 32px rgba(15, 23, 42, 0.08);
+      z-index: 2;
+    }
+
+    &:focus-within {
+      z-index: 3;
+    }
+  }
+
+  .business-plan-directory-item__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .business-plan-directory-item__icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+  }
+
+  .business-plan-directory-item__icon--folder {
+    background: rgba(241, 90, 34, 0.12);
+    color: #f15a22;
+  }
+
+  .business-plan-directory-item__icon--file {
+    background: rgba(59, 130, 246, 0.12);
+    color: #2563eb;
+  }
+
+  .business-plan-directory-item__icon--presentation {
+    background: rgba(241, 90, 34, 0.12);
+    color: #f15a22;
+  }
+
+  .business-plan-directory-item__icon--spreadsheet {
+    background: rgba(16, 185, 129, 0.14);
+    color: #059669;
+  }
+
+  .business-plan-directory-item__icon--pdf {
+    background: rgba(239, 68, 68, 0.12);
+    color: #dc2626;
+  }
+
+  .business-plan-directory-item__icon--document {
+    background: rgba(79, 70, 229, 0.12);
+    color: #4338ca;
+  }
+
+  .business-plan-directory-item__action-btn {
+    border: none;
+    background: transparent;
+    color: #6b7280;
+    padding: 0.2rem;
+    border-radius: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover,
+    &:focus-visible {
+      background: rgba(241, 90, 34, 0.1);
+      color: #f15a22;
+    }
+  }
+
+  .business-plan-directory-item .dropdown-menu {
+    z-index: 1085;
+  }
+
+  .business-plan-directory-item__name {
+    border: none;
+    background: transparent;
+    padding: 0;
+    text-align: left;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.45;
+    color: #111827;
+    word-break: break-word;
+
+    &.is-clickable:hover,
+    &.is-clickable:focus-visible {
+      color: #f15a22;
+    }
+
+    &:disabled {
+      opacity: 1;
+      cursor: default;
+    }
+  }
+
+  .business-plan-directory-item__meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    margin-top: auto;
+    color: #6b7280;
+    font-size: 0.84rem;
+    line-height: 1.45;
+  }
+
+  .business-plan-directory-item__cta {
+    margin-top: 0.15rem;
+    border-radius: 12px;
+    font-weight: 600;
+  }
+
+}
+
+.business-plan-directory-modal {
+  .modal-content {
+    border: 1px solid var(--theme-deep-border, rgba(241, 90, 34, 0.16));
+    border-radius: 18px;
+    overflow: hidden;
+  }
+}
+
+body.dark-only {
+  .business-plan-directory-page {
+    .business-plan-directory-card {
+      background: rgba(17, 23, 39, 0.94);
+      border-color: rgba(241, 90, 34, 0.28);
+      box-shadow: 0 20px 42px rgba(0, 0, 0, 0.34);
+    }
+
+    .business-plan-directory-breadcrumb__item {
+      color: #cbd5e1;
+
+      &:not(:disabled):hover {
+        color: #ff8d5b;
+      }
+
+      &.is-active {
+        color: #f8fafc;
+      }
+    }
+
+    .business-plan-directory-breadcrumb__separator,
+    .business-plan-directory-subtitle,
+    .business-plan-directory-search-scope {
+      color: #94a3b8;
+    }
+
+    .business-plan-directory-alert {
+      background: rgba(30, 41, 59, 0.78);
+      border-color: rgba(241, 90, 34, 0.22);
+      color: #e2e8f0;
+    }
+
+    .business-plan-directory-item {
+      background:
+        linear-gradient(180deg, rgba(30, 41, 59, 0.94) 0%, rgba(17, 24, 39, 0.94) 100%);
+      border-color: rgba(148, 163, 184, 0.18);
+      box-shadow: 0 16px 30px rgba(0, 0, 0, 0.26);
+
+      &:hover {
+        border-color: rgba(241, 90, 34, 0.34);
+        box-shadow: 0 20px 36px rgba(0, 0, 0, 0.34);
+      }
+    }
+
+    .business-plan-directory-item__icon--folder {
+      background: rgba(241, 90, 34, 0.16);
+      color: #ff9468;
+    }
+
+    .business-plan-directory-item__icon--file {
+      background: rgba(59, 130, 246, 0.18);
+      color: #93c5fd;
+    }
+
+    .business-plan-directory-item__icon--presentation {
+      background: rgba(241, 90, 34, 0.18);
+      color: #ff9f78;
+    }
+
+    .business-plan-directory-item__icon--spreadsheet {
+      background: rgba(16, 185, 129, 0.18);
+      color: #6ee7b7;
+    }
+
+    .business-plan-directory-item__icon--pdf {
+      background: rgba(239, 68, 68, 0.16);
+      color: #fca5a5;
+    }
+
+    .business-plan-directory-item__icon--document {
+      background: rgba(99, 102, 241, 0.18);
+      color: #c4b5fd;
+    }
+
+    .business-plan-directory-item__action-btn {
+      color: #cbd5e1;
+
+      &:hover,
+      &:focus-visible {
+        background: rgba(241, 90, 34, 0.14);
+        color: #ff9468;
+      }
+    }
+
+    .business-plan-directory-item__name {
+      color: #f8fafc;
+
+      &.is-clickable:hover,
+      &.is-clickable:focus-visible {
+        color: #ff9468;
+      }
+    }
+
+    .business-plan-directory-item__meta {
+      color: #94a3b8;
+    }
+  }
+
+  .business-plan-directory-modal {
+    .modal-content {
+      background: rgba(17, 23, 39, 0.98);
+      border-color: rgba(241, 90, 34, 0.26);
+    }
+
+    .modal-header,
+    .modal-footer {
+      border-color: rgba(148, 163, 184, 0.14);
+    }
+
+    .modal-title,
+    label,
+    small,
+    .text-muted {
+      color: #e2e8f0 !important;
+    }
+
+    .form-control,
+    .form-select {
+      background: rgba(15, 23, 42, 0.92);
+      border-color: rgba(148, 163, 184, 0.2);
+      color: #f8fafc;
+    }
+  }
+}
+
+@media (max-width: 991.98px) {
+  .business-plan-directory-page {
+    .business-plan-directory-header__actions {
+      justify-content: flex-start;
+    }
+  }
+}
+
+@media (max-width: 767.98px) {
+  .business-plan-directory-page {
+    .business-plan-directory-grid {
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+    }
+
+    .business-plan-directory-item {
+      min-height: 192px;
+      padding: 0.9rem;
+    }
+  }
+}
+
+@media (max-width: 575.98px) {
+  .business-plan-directory-page {
+    .business-plan-directory-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .business-plan-directory-action-btn {
+      width: 100%;
+    }
+  }
+}

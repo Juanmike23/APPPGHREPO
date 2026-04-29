@@ -1,0 +1,181 @@
+/*
+ * PGH-DOC
+ * File: src/assets/scss/theme/_departmentBarChart.scss
+ * Apa fungsi bagian ini:
+ * - File ini mengatur style/theme visual agar tampilan konsisten.
+ * Kenapa perlu:
+ * - Perlu agar pengalaman pengguna konsisten, flow antar halaman jelas, dan perubahan UI tidak memecah perilaku fitur.
+ * Aturan khususnya apa:
+ * - Gunakan komponen global tabel/filter/export yang sudah tersedia; hindari duplikasi implementasi per halaman.
+ * - Jaga konsistensi style/theme dan perilaku UX lintas unit.
+ * - Integrasi data harus mengikuti adapter serverQuery/helper global yang sudah ada.
+ */
+
+/* =========================
+   DepartmentBarChart.scss
+   ========================= */
+
+$brand: #F15A22;               // oranye BNI
+$radius: 1rem;
+$shadow-card: 0 8px 24px rgba(0,0,0,.08);
+$border: rgba(0,0,0,.08);
+$text: #222;
+$muted: #6c757d;
+
+/* ---- Kartu chart ---- */
+.opex-chart {
+  padding: 0.75rem 0.75rem 1rem;
+  border-radius: $radius;
+  box-shadow: $shadow-card;
+  background: #fff;
+  color: $text;
+
+  @media (min-width: 768px) {
+    padding: 1rem 1rem 1.25rem;
+  }
+}
+
+/* ---- Posisi judul: samakan wrapper dengan pie dropdown ---- */
+.pie-dd { width: 100%; }
+.pie-dd--center {
+  max-width: 420px; /* samakan dengan pie dropdown */
+  margin: 0 auto;
+  display: block;
+  text-align: center;
+
+  h5, .h5 {
+    margin: 0;
+    font-weight: 700;
+    line-height: 1.25;
+    color: #111;
+    letter-spacing: .1px;
+  }
+}
+
+/* ---- Tombol departemen (link) - aksen brand ---- */
+.brand-link {
+  color: $brand !important;
+  text-decoration: none;
+
+  &:hover, &:focus {
+    color: rgba($brand, .85) !important;
+    text-decoration: underline;
+  }
+}
+
+/* ---- Popover daftar assign ---- */
+.brand-popover {
+  .popover {
+    border: 1px solid $border;
+    box-shadow: 0 10px 28px rgba(0,0,0,.10);
+    border-radius: .75rem;
+  }
+
+  .popover-header {
+    background: rgba($brand, .08);
+    color: #2b2b2b;
+    border-bottom: 1px solid rgba(0,0,0,.06);
+    font-weight: 700;
+    border-top-left-radius: .75rem;
+    border-top-right-radius: .75rem;
+  }
+
+  .popover-body {
+    font-size: .95rem;
+    color: $text;
+    max-height: 360px;
+    overflow: auto;
+
+    /* scrollbar tipis */
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0,0,0,.25) transparent;
+    &::-webkit-scrollbar { width: 6px; height: 6px; }
+    &::-webkit-scrollbar-thumb { background: rgba(0,0,0,.25); border-radius: 8px; }
+    &::-webkit-scrollbar-track { background: transparent; }
+  }
+
+  /* item di dalam popover (assigned / available) */
+  .assign-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: .5rem;
+    padding: .375rem .5rem;
+    border: 1px solid rgba(0,0,0,.08);
+    border-radius: .5rem;
+    margin-bottom: .375rem;
+    background: #fff;
+
+    &:hover {
+      border-color: rgba($brand, .35);
+      background: #fffaf7;
+    }
+
+    .assign-title {
+      font-weight: 600;
+      color: #222;
+      line-height: 1.2;
+    }
+  }
+}
+
+/* ---- ApexCharts: tipografi & tooltip konsisten ---- */
+.apexcharts-canvas, .apexcharts-tooltip, .apexcharts-xaxistooltip, .apexcharts-yaxistooltip {
+  font-family: inherit !important;
+}
+
+.apexcharts-tooltip.apexcharts-theme-light {
+  border: 1px solid rgba(0,0,0,.45) !important;
+  border-radius: .5rem !important;
+  box-shadow: none !important;
+  background: #fff !important;
+}
+.apexcharts-tooltip-title {
+  border-bottom: 1px solid rgba(0,0,0,.25) !important;
+}
+
+/* Axis tooltips */
+.apexcharts-xaxistooltip,
+.apexcharts-yaxistooltip {
+  border: 1px solid rgba(0,0,0,.45) !important;
+  border-radius: .5rem !important;
+  background: #fff !important;
+  box-shadow: none !important;
+  color: inherit !important;
+}
+.apexcharts-xaxistooltip:before { border-bottom-color: rgba(0,0,0,.45) !important; }
+.apexcharts-xaxistooltip:after  { border-bottom-color: #fff !important; }
+.apexcharts-yaxistooltip:before { border-right-color: rgba(0,0,0,.45) !important; }
+.apexcharts-yaxistooltip:after  { border-right-color: #fff !important; }
+
+/* Data labels terbaca di warna pastel */
+.apexcharts-data-labels,
+.apexcharts-datalabel {
+  text-shadow: none !important;
+  filter: none !important;
+  stroke: none !important;
+
+  text {
+    fill: #333 !important;
+    font-weight: 700 !important;
+  }
+}
+
+/* Grid */
+.opex-chart .apexcharts-gridline {
+  stroke: rgba(0,0,0,.08) !important;
+}
+
+/* Utility */
+.text-muted-soft { color: $muted; }
+.divider { height: 1px; background: $border; margin: .5rem 0; }
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

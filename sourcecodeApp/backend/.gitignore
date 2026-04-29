@@ -1,0 +1,39 @@
+# .NET build
+bin/
+obj/
+publish/
+*.user
+*.suo
+
+# Visual Studio
+.vs/
+*.vc.db
+*.vscode/
+
+# ASP.NET
+appsettings.Development.json
+appsettings.Local.json
+
+# Logs
+*.log
+
+# DB & secrets
+*.mdf
+*.ldf
+*.db
+secrets.json
+*.pfx
+tools/signing/certs/
+
+# Import/cache artifacts
+import-temp/
+.codex-build/
+build-verify/
+App_Data/
+
+# npm/yarn cache if used
+node_modules/
+
+# System
+Thumbs.db
+.DS_Store

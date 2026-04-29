@@ -1,0 +1,18 @@
+/*
+ * PGH-DOC
+ * File: src/assets/scss/range-slider.scss
+ * Apa fungsi bagian ini:
+ * - File ini mengatur style/theme visual agar tampilan konsisten.
+ * Kenapa perlu:
+ * - Perlu agar pengalaman pengguna konsisten, flow antar halaman jelas, dan perubahan UI tidak memecah perilaku fitur.
+ * Aturan khususnya apa:
+ * - Gunakan komponen global tabel/filter/export yang sudah tersedia; hindari duplikasi implementasi per halaman.
+ * - Jaga konsistensi style/theme dan perilaku UX lintas unit.
+ * - Integrasi data harus mengikuti adapter serverQuery/helper global yang sudah ada.
+ */
+
+/*
+ * Legacy placeholder.
+ * Previous ion.rangeSlider imports referenced files that are not present in this repository.
+ * Keep this stylesheet empty so any direct include won't break Sass compilation.
+ */

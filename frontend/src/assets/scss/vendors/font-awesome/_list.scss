@@ -1,0 +1,34 @@
+/*
+ * PGH-DOC
+ * File: src/assets/scss/vendors/font-awesome/_list.scss
+ * Apa fungsi bagian ini:
+ * - File ini mengatur style/theme visual agar tampilan konsisten.
+ * Kenapa perlu:
+ * - Perlu agar pengalaman pengguna konsisten, flow antar halaman jelas, dan perubahan UI tidak memecah perilaku fitur.
+ * Aturan khususnya apa:
+ * - Gunakan komponen global tabel/filter/export yang sudah tersedia; hindari duplikasi implementasi per halaman.
+ * - Jaga konsistensi style/theme dan perilaku UX lintas unit.
+ * - Integrasi data harus mengikuti adapter serverQuery/helper global yang sudah ada.
+ */
+
+@use "variables" as *;
+
+// List Icons
+// -------------------------
+
+.#{$fa-css-prefix}-ul {
+  padding-left: 0;
+  margin-left: $fa-li-width;
+  list-style-type: none;
+  > li { position: relative; }
+}
+.#{$fa-css-prefix}-li {
+  position: absolute;
+  left: -$fa-li-width;
+  width: $fa-li-width;
+  top: calc(2em / 14);
+  text-align: center;
+  &.#{$fa-css-prefix}-lg {
+    left: -$fa-li-width + calc(4em / 14);
+  }
+}

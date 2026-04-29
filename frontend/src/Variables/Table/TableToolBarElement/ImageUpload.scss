@@ -1,0 +1,72 @@
+/*
+ * PGH-DOC
+ * File: src/Variables/Table/TableToolBarElement/ImageUpload.scss
+ * Apa fungsi bagian ini:
+ * - Styling global untuk komponen upload/preview/download image di cell table.
+ * Kenapa perlu:
+ * - Agar tampilan antar unit konsisten dan menghindari inline style berulang.
+ * Aturan khususnya apa:
+ * - Gunakan modifier class untuk varian UI, jangan duplikasi style inline per halaman.
+ */
+
+.table-image-upload {
+  width: 100%;
+  min-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.table-image-upload--center {
+  justify-content: center;
+}
+
+.table-image-upload__actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.table-image-upload__actions--compliance-events {
+  gap: 0.8rem;
+  min-height: 38px;
+  padding: 0.45rem 0.72rem;
+  border-radius: 999px;
+  border: 1px solid rgba(36, 54, 74, 0.1);
+  background: rgba(248, 250, 252, 0.88);
+}
+
+.table-image-upload__icon {
+  font-size: 20px;
+  transition: transform 160ms ease, color 160ms ease, opacity 160ms ease;
+}
+
+.table-image-upload__actions--compliance-events .table-image-upload__icon {
+  font-size: 18px;
+}
+
+.table-image-upload__icon--eye {
+  cursor: pointer;
+  color: #f15a22;
+}
+
+.table-image-upload__icon--action {
+  cursor: pointer;
+  color: #16a34a;
+}
+
+.table-image-upload__icon--disabled {
+  cursor: not-allowed;
+  color: #cbd5e1;
+  opacity: 0.85;
+}
+
+.table-image-upload__icon--eye:hover,
+.table-image-upload__icon--action:hover {
+  transform: translateY(-1px);
+}
+
+body.dark-only .table-image-upload__actions--compliance-events {
+  background: rgba(15, 23, 42, 0.72);
+  border-color: rgba(148, 163, 184, 0.16);
+}

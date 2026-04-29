@@ -1,0 +1,291 @@
+/*
+ * PGH-DOC
+ * File: src/Auth/Signin.scss
+ * Apa fungsi bagian ini:
+ * - File ini mengatur autentikasi, login flow, dan kontrol akses user.
+ * Kenapa perlu:
+ * - Perlu agar pengalaman pengguna konsisten, flow antar halaman jelas, dan perubahan UI tidak memecah perilaku fitur.
+ * Aturan khususnya apa:
+ * - Gunakan komponen global tabel/filter/export yang sudah tersedia; hindari duplikasi implementasi per halaman.
+ * - Jaga konsistensi style/theme dan perilaku UX lintas unit.
+ * - Integrasi data harus mengikuti adapter serverQuery/helper global yang sudah ada.
+ */
+
+.auth-screen {
+  position: relative;
+  min-height: 100vh;
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(circle at 20% 18%, rgba(241, 90, 34, 0.24), transparent 44%),
+    radial-gradient(circle at 82% 14%, rgba(241, 90, 34, 0.16), transparent 40%),
+    linear-gradient(145deg, #fff7f0 0%, #fefaf7 52%, #fffdfb 100%);
+}
+
+.auth-theme-toggle {
+  position: fixed;
+  top: 16px;
+  right: 18px;
+  z-index: 30;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border: 1px solid rgba(241, 90, 34, 0.28);
+  border-radius: 999px;
+  padding: 0.42rem 0.82rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #b84a1c;
+  background: rgba(255, 252, 249, 0.92);
+  box-shadow: 0 8px 18px rgba(36, 54, 74, 0.1);
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.auth-theme-toggle::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: transparent;
+  transition: background 0.2s ease;
+  pointer-events: none;
+}
+
+.auth-theme-toggle:hover {
+  background: #fff0e9;
+  color: #a43d14;
+}
+
+.auth-theme-toggle:hover::before,
+.auth-theme-toggle:focus-visible::before {
+  background: rgba(241, 90, 34, 0.08);
+}
+
+.auth-theme-toggle:focus-visible {
+  outline: 2px solid rgba(241, 90, 34, 0.5);
+  outline-offset: 2px;
+}
+
+.auth-screen__card {
+  width: min(460px, 100%);
+  border: 1px solid rgba(241, 90, 34, 0.2);
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 22px 48px rgba(36, 54, 74, 0.14);
+  backdrop-filter: blur(8px);
+  overflow: hidden;
+}
+
+.auth-screen__content {
+  padding: 1.65rem 1.5rem 1.45rem;
+}
+
+.auth-screen .theme-form .col-form-label {
+  color: #8b4d2e;
+  font-weight: 600;
+}
+
+.auth-screen .theme-form p {
+  color: #8a664f;
+}
+
+.auth-screen .theme-form .form-control {
+  background: #fffdfb;
+  border: 1px solid rgba(241, 90, 34, 0.16);
+  color: #3f3028;
+}
+
+.auth-screen .theme-form .form-control::placeholder {
+  color: #a6816e;
+}
+
+.auth-screen .theme-form .form-control:focus {
+  border-color: rgba(241, 90, 34, 0.48) !important;
+  box-shadow: 0 0 0 0.18rem rgba(241, 90, 34, 0.18) !important;
+}
+
+.auth-screen .theme-form a {
+  color: #b84a1c;
+}
+
+.auth-screen .theme-form a:hover {
+  color: #a13d15;
+}
+
+.auth-session-notice {
+  margin-bottom: 1rem;
+}
+
+.auth-session-notice__dismiss {
+  margin-top: 0.75rem;
+  border: 0;
+  background: transparent;
+  color: #8b4d2e;
+  font-size: 0.875rem;
+  font-weight: 600;
+  padding: 0;
+  cursor: pointer;
+}
+
+.auth-session-notice__dismiss:hover {
+  color: #b84a1c;
+}
+
+.auth-session-notice__dismiss:focus-visible {
+  outline: 2px solid rgba(241, 90, 34, 0.45);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+.auth-submit-btn.btn,
+.auth-submit-btn.btn:hover,
+.auth-submit-btn.btn:focus,
+.auth-submit-btn.btn:active {
+  border-color: #f15a22 !important;
+  background: linear-gradient(180deg, #f47c4c 0%, #f15a22 100%) !important;
+  color: #ffffff !important;
+  box-shadow: 0 10px 22px rgba(241, 90, 34, 0.26);
+}
+
+.auth-submit-btn.btn:disabled {
+  border-color: rgba(241, 90, 34, 0.5) !important;
+  background: linear-gradient(180deg, #f3a282 0%, #ea8b63 100%) !important;
+  color: #ffffff !important;
+  opacity: 1;
+}
+
+.login-password-field {
+  position: relative;
+}
+
+.login-password-input {
+  padding-right: 48px !important;
+}
+
+.login-password-input::-ms-reveal,
+.login-password-input::-ms-clear {
+  display: none;
+}
+
+.login-password-input::-webkit-contacts-auto-fill-button,
+.login-password-input::-webkit-credentials-auto-fill-button {
+  display: none !important;
+  visibility: hidden;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+}
+
+.login-password-toggle {
+  position: absolute;
+  top: 50%;
+  right: 14px;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #b25a31;
+  cursor: pointer;
+}
+
+.login-password-toggle:hover {
+  color: #b84a1c;
+}
+
+.login-password-toggle:focus-visible {
+  outline: 2px solid #f15a22;
+  outline-offset: 2px;
+  border-radius: 999px;
+}
+
+body.dark-only .auth-screen {
+  background:
+    radial-gradient(circle at 18% 18%, rgba(241, 90, 34, 0.22), transparent 40%),
+    radial-gradient(circle at 82% 14%, rgba(241, 90, 34, 0.12), transparent 36%),
+    linear-gradient(145deg, #0f1727 0%, #131b2e 50%, #0d1524 100%);
+}
+
+body.dark-only .auth-theme-toggle {
+  border-color: rgba(241, 90, 34, 0.36);
+  background: rgba(26, 34, 52, 0.9);
+  color: #ffd5bf;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.34);
+}
+
+body.dark-only .auth-theme-toggle:hover {
+  background: rgba(241, 90, 34, 0.2);
+  color: #ffe7da;
+}
+
+body.dark-only .auth-theme-toggle:hover::before,
+body.dark-only .auth-theme-toggle:focus-visible::before {
+  background: rgba(241, 90, 34, 0.18);
+}
+
+body.dark-only .auth-screen__card {
+  border-color: rgba(241, 90, 34, 0.24);
+  background: rgba(17, 23, 39, 0.94);
+  box-shadow: 0 22px 46px rgba(0, 0, 0, 0.42);
+}
+
+body.dark-only .auth-screen .theme-form h4,
+body.dark-only .auth-screen .theme-form label,
+body.dark-only .auth-screen .theme-form p,
+body.dark-only .auth-screen .theme-form span {
+  color: #e5e7eb !important;
+}
+
+body.dark-only .auth-screen .theme-form .form-control {
+  background: rgba(26, 34, 52, 0.92);
+  border-color: rgba(241, 90, 34, 0.26);
+  color: #f8fafc;
+}
+
+body.dark-only .auth-screen .theme-form .form-control::placeholder {
+  color: #c3cfdd;
+}
+
+body.dark-only .auth-screen .theme-form a {
+  color: #ffbf88;
+}
+
+body.dark-only .auth-session-notice__dismiss {
+  color: #e5e7eb;
+}
+
+body.dark-only .auth-session-notice__dismiss:hover {
+  color: #ffbf88;
+}
+
+body.dark-only .login-password-toggle {
+  color: #e8edf4;
+}
+
+body.dark-only .login-password-toggle:hover {
+  color: #ffbf88;
+}
+
+@media (max-width: 575.98px) {
+  .auth-screen {
+    padding: 16px;
+  }
+
+  .auth-screen__content {
+    padding: 1.35rem 1.2rem 1.2rem;
+  }
+
+  .auth-theme-toggle {
+    right: 12px;
+    top: 12px;
+    padding: 0.36rem 0.74rem;
+    font-size: 0.74rem;
+  }
+}

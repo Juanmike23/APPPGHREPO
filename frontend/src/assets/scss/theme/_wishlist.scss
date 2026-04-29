@@ -1,0 +1,32 @@
+/*
+ * PGH-DOC
+ * File: src/assets/scss/theme/_wishlist.scss
+ * Apa fungsi bagian ini:
+ * - File ini mengatur style/theme visual agar tampilan konsisten.
+ * Kenapa perlu:
+ * - Perlu agar pengalaman pengguna konsisten, flow antar halaman jelas, dan perubahan UI tidak memecah perilaku fitur.
+ * Aturan khususnya apa:
+ * - Gunakan komponen global tabel/filter/export yang sudah tersedia; hindari duplikasi implementasi per halaman.
+ * - Jaga konsistensi style/theme dan perilaku UX lintas unit.
+ * - Integrasi data harus mengikuti adapter serverQuery/helper global yang sudah ada.
+ */
+
+/**=====================
+  82. Wishlist CSS start
+==========================**/
+@use "../utils/variables" as *;
+
+.wishlist {
+  table {
+    tr {
+      td {
+        svg {
+          color: $danger-color;
+        }
+      }
+    }
+  }
+}
+/**=====================
+  82. Wishlist CSS Ends
+==========================**/
